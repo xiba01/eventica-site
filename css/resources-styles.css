@@ -1,0 +1,240 @@
+/* Resources Page Styles */
+.resources-page-container {
+  display: none;
+  padding: 30px;
+}
+
+.resources-tabs {
+  display: flex;
+  border-bottom: 2px solid #333348;
+  margin-bottom: 30px;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  color: #a0a0b0;
+  cursor: pointer;
+  font-size: 1em;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.tab-btn.active {
+  color: #6f42c1;
+  border-bottom-color: #6f42c1;
+  font-weight: 500;
+}
+
+.tab-btn:hover {
+  color: #ffffff;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.venue-matching-content h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.venue-filter-panel {
+  background-color: #1f1f32;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  align-items: end;
+}
+
+.filter-group {
+  margin-bottom: 10px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9em;
+  color: #b0b0c0;
+}
+
+.venue-filter-panel input[type="text"],
+.venue-filter-panel input[type="number"],
+.venue-filter-panel select {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: #2a2a40;
+  border: 1px solid #444458;
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-size: 0.9em;
+}
+
+.venue-filter-panel input[type="text"]::placeholder,
+.venue-filter-panel input[type="number"]::placeholder {
+  color: #777;
+}
+
+.amenities-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.amenities-checkboxes span {
+  display: flex;
+  align-items: center;
+}
+
+.amenities-checkboxes input[type="checkbox"] {
+  margin-right: 5px;
+  accent-color: #6f42c1;
+}
+
+.amenities-checkboxes label {
+  font-size: 0.85em;
+  color: #d0d0e0;
+  margin-bottom: 0;
+}
+
+#search-venues-btn {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-top: 10px;
+  padding: 12px 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#search-venues-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.venue-results-area h3 {
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.venue-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.venue-result-card {
+  background-color: #2a2a40;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.venue-result-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.venue-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: #444;
+}
+
+.venue-card-details {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.venue-card-details h4 {
+  font-size: 1.2em;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.venue-location-text,
+.venue-capacity-text,
+.venue-price-estimate {
+  font-size: 0.9em;
+  color: #a0a0b0;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.venue-location-text svg {
+  width: 14px;
+  height: 14px;
+  fill: #a0a0b0;
+  margin-right: 6px;
+}
+
+.venue-card-tags {
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag.venue-type-tag {
+  background-color: #6f42c1;
+  color: #ffffff;
+}
+
+.tag.amenity-tag {
+  background-color: #3b3b58;
+  color: #a0a0b0;
+}
+
+.view-venue-details-btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+.no-venues-found {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #1f1f32;
+  border-radius: 12px;
+  margin-top: 30px;
+}
+
+.no-venues-found p {
+  font-size: 1.1em;
+  color: #a0a0b0;
+}
+
+.resources-aura-suggestion {
+  margin-top: 30px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .venue-filter-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .resources-tabs {
+    justify-content: flex-start;
+  }
+}

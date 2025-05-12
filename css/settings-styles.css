@@ -1,0 +1,217 @@
+/* Settings Page Styles */
+
+.settings-page-container {
+  padding: 30px;
+}
+
+.settings-page-container h1 {
+  margin-bottom: 10px;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+.page-subtitle {
+  color: #a0a0b0;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.settings-section {
+  background-color: #1f1f32;
+  padding: 25px 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.settings-section h2 {
+  display: flex;
+  align-items: center;
+  font-size: 1.4em;
+  color: #e0e0e0;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #333348;
+  padding-bottom: 15px;
+}
+
+.settings-section h2 svg {
+  width: 22px;
+  height: 22px;
+  fill: #a0a0b0;
+  margin-right: 12px;
+}
+
+.profile-avatar-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+#profile-avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #444;
+  margin-right: 20px;
+  border: 2px solid #4a4a6a;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9em;
+  color: #b0b0c0;
+  margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: #2a2a40;
+  border: 1px solid #444458;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 0.95em;
+}
+
+.form-group input[disabled] {
+  background-color: #252535;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.form-group small {
+  font-size: 0.8em;
+  color: #888;
+  display: block;
+  margin-top: 5px;
+}
+
+.notification-option,
+.appearance-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #2a2a40;
+}
+
+.notification-option:last-child,
+.appearance-option:last-child {
+  border-bottom: none;
+}
+
+.notification-option label,
+.appearance-option label {
+  font-size: 0.95em;
+  color: #d0d0e0;
+}
+
+/* Toggle switch styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #444458;
+  transition: 0.4s;
+  border-radius: 26px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #6f42c1;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.theme-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.theme-btn {
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #444458;
+  background-color: #2a2a40;
+  color: #a0a0b0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.theme-btn.active {
+  background-color: #6f42c1;
+  color: #ffffff;
+  border-color: #6f42c1;
+}
+
+.theme-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+#save-profile-btn,
+#save-notifications-btn,
+#save-appearance-btn {
+  display: block;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.settings-success-message {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background-color: #2e7d32;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.settings-success-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}

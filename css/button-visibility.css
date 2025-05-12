@@ -1,0 +1,9 @@
+/* Button visibility styles for the wizard navigation */
+#prev-spark-step1,
+#next-spark-step2,
+#prev-spark-step2,
+#next-spark-step3,
+#prev-spark-step3,
+#complete-spark {
+  display: none;
+}
