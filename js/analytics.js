@@ -180,248 +180,184 @@ function setupKPICardInteractions() {
 function drawAttendanceLineChart() {
   const svg = document.getElementById("attendance-line-chart");
   if (!svg) return;
+  
+  const chartContainer = svg.parentElement;
+  
+  // Show loading indicator
+  if (chartContainer && window.AURALoader) {
+    window.AURALoader.showInlineLoader(chartContainer);
+  }
+  
+  // Add a small delay to simulate data loading
+  setTimeout(() => {
+    // Clear existing content
+    svg.innerHTML = "";
 
-  // Clear existing content
-  svg.innerHTML = "";
+    // Get SVG container dimensions
+    const svgRect = svg.getBoundingClientRect();
+    const width = svgRect.width || 500;
+    const height = 250;
 
-  // Get SVG container dimensions
-  const svgRect = svg.getBoundingClientRect();
-  const width = svgRect.width || 500;
-  const height = 250;
+    // Set explicit dimensions on the SVG to ensure proper sizing
+    svg.style.width = "100%";
+    svg.style.height = "250px";
 
-  // Set explicit dimensions on the SVG to ensure proper sizing
-  svg.style.width = "100%";
-  svg.style.height = "250px";
+    // Update viewBox to match container dimensions
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
-  // Update viewBox to match container dimensions
-  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    const padding = { top: 20, right: 30, bottom: 30, left: 40 };
 
-  const padding = { top: 20, right: 30, bottom: 30, left: 40 };
+    // Get current data based on active toggle
+    const activeToggle = document.querySelector(".chart-toggle-btn.active");
+    const activeMetric = activeToggle
+      ? activeToggle.dataset.metric
+      : "attendance";
+    const data = analyticsData[activeMetric];
 
-  // Get current data based on active toggle
-  const activeToggle = document.querySelector(".chart-toggle-btn.active");
-  const activeMetric = activeToggle
-    ? activeToggle.dataset.metric
-    : "attendance";
-  const data = analyticsData[activeMetric];
+    // Calculate scales
+    const maxValue = Math.max(...data.values) * 1.1; // Add 10% padding
 
-  // Calculate scales
-  const maxValue = Math.max(...data.values) * 1.1; // Add 10% padding
+    // X scale
+    const xStep =
+      (width - padding.left - padding.right) / (data.labels.length - 1);
 
-  // X scale
-  const xStep =
-    (width - padding.left - padding.right) / (data.labels.length - 1);
+    // Y scale
+    const yScale = (height - padding.top - padding.bottom) / maxValue;
 
-  // Y scale
-  const yScale = (height - padding.top - padding.bottom) / maxValue;
+    // Draw axes
+    // X-axis
+    const xAxis = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    xAxis.setAttribute("class", "x-axis");
 
-  // Draw axes
-  // X-axis
-  const xAxis = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  xAxis.setAttribute("class", "x-axis");
+    // Y-axis
+    const yAxis = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    yAxis.setAttribute("class", "y-axis");
 
-  // Y-axis
-  const yAxis = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  yAxis.setAttribute("class", "y-axis");
-
-  // Draw the vertical line for y-axis
-  const yAxisLine = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "line"
-  );
-  yAxisLine.setAttribute("x1", padding.left);
-  yAxisLine.setAttribute("y1", padding.top);
-  yAxisLine.setAttribute("x2", padding.left);
-  yAxisLine.setAttribute("y2", height - padding.bottom);
-  yAxisLine.setAttribute("stroke", "#444");
-  yAxisLine.setAttribute("stroke-width", "1");
-  yAxis.appendChild(yAxisLine);
-
-  // Draw the horizontal line for x-axis
-  const xAxisLine = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "line"
-  );
-  xAxisLine.setAttribute("x1", padding.left);
-  xAxisLine.setAttribute("y1", height - padding.bottom);
-  xAxisLine.setAttribute("x2", width - padding.right);
-  xAxisLine.setAttribute("y2", height - padding.bottom);
-  xAxisLine.setAttribute("stroke", "#444");
-  xAxisLine.setAttribute("stroke-width", "1");
-  xAxis.appendChild(xAxisLine);
-
-  // Create y-axis ticks
-  const tickCount = 5;
-  const tickStep = maxValue / (tickCount - 1);
-
-  for (let i = 0; i < tickCount; i++) {
-    const tickValue = Math.round(i * tickStep);
-    const yPos = height - padding.bottom - tickValue * yScale;
-
-    // Tick mark
-    const tick = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    tick.setAttribute("x1", padding.left - 5);
-    tick.setAttribute("y1", yPos);
-    tick.setAttribute("x2", padding.left);
-    tick.setAttribute("y2", yPos);
-    tick.setAttribute("stroke", "#888");
-    tick.setAttribute("stroke-width", "1");
-    yAxis.appendChild(tick);
-
-    // Tick label
-    const label = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "text"
-    );
-    label.setAttribute("x", padding.left - 8);
-    label.setAttribute("y", yPos + 4);
-    label.setAttribute("text-anchor", "end");
-    label.setAttribute("font-size", "10");
-    label.setAttribute("fill", "#888");
-    label.textContent = tickValue;
-    yAxis.appendChild(label);
-
-    // Horizontal grid line
-    const gridLine = document.createElementNS(
+    // Draw the vertical line for y-axis
+    const yAxisLine = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "line"
     );
-    gridLine.setAttribute("x1", padding.left);
-    gridLine.setAttribute("y1", yPos);
-    gridLine.setAttribute("x2", width - padding.right);
-    gridLine.setAttribute("y2", yPos);
-    gridLine.setAttribute("stroke", "#444");
-    gridLine.setAttribute("stroke-width", "0.5");
-    gridLine.setAttribute("stroke-dasharray", "3,3");
-    yAxis.appendChild(gridLine);
-  }
+    yAxisLine.setAttribute("x1", padding.left);
+    yAxisLine.setAttribute("y1", padding.top);
+    yAxisLine.setAttribute("x2", padding.left);
+    yAxisLine.setAttribute("y2", height - padding.bottom);
+    yAxisLine.setAttribute("stroke", "#444");
+    yAxisLine.setAttribute("stroke-width", "1");
+    yAxis.appendChild(yAxisLine);
 
-  // Add x-axis labels
-  data.labels.forEach((label, i) => {
-    const xPos = padding.left + i * xStep;
-
-    // Tick mark
-    const tick = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    tick.setAttribute("x1", xPos);
-    tick.setAttribute("y1", height - padding.bottom);
-    tick.setAttribute("x2", xPos);
-    tick.setAttribute("y2", height - padding.bottom + 5);
-    tick.setAttribute("stroke", "#888");
-    tick.setAttribute("stroke-width", "1");
-    xAxis.appendChild(tick);
-
-    // Label
-    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    text.setAttribute("x", xPos);
-    text.setAttribute("y", height - padding.bottom + 20);
-    text.setAttribute("text-anchor", "middle");
-    text.setAttribute("font-size", "10");
-    text.setAttribute("fill", "#888");
-    text.textContent = label;
-    xAxis.appendChild(text);
-  });
-
-  svg.appendChild(xAxis);
-  svg.appendChild(yAxis);
-
-  // Create line for current period
-  const currentLine = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "path"
-  );
-  let pathD = `M ${padding.left} ${
-    height - padding.bottom - data.values[0] * yScale
-  }`;
-
-  // Add path points
-  data.values.forEach((value, i) => {
-    const x = padding.left + i * xStep;
-    const y = height - padding.bottom - value * yScale;
-    pathD += ` L ${x} ${y}`;
-  });
-
-  currentLine.setAttribute("d", pathD);
-  currentLine.setAttribute("fill", "none");
-  currentLine.setAttribute("stroke", "#7e57c2");
-  currentLine.setAttribute("stroke-width", "3");
-  svg.appendChild(currentLine);
-
-  // Add data points with hover effect
-  data.values.forEach((value, i) => {
-    const x = padding.left + i * xStep;
-    const y = height - padding.bottom - value * yScale;
-
-    const dataPoint = document.createElementNS(
+    // Draw the horizontal line for x-axis
+    const xAxisLine = document.createElementNS(
       "http://www.w3.org/2000/svg",
-      "circle"
+      "line"
     );
-    dataPoint.setAttribute("cx", x);
-    dataPoint.setAttribute("cy", y);
-    dataPoint.setAttribute("r", "5");
-    dataPoint.setAttribute("fill", "#7e57c2");
-    dataPoint.setAttribute("stroke", "#fff");
-    dataPoint.setAttribute("stroke-width", "2");
+    xAxisLine.setAttribute("x1", padding.left);
+    xAxisLine.setAttribute("y1", height - padding.bottom);
+    xAxisLine.setAttribute("x2", width - padding.right);
+    xAxisLine.setAttribute("y2", height - padding.bottom);
+    xAxisLine.setAttribute("stroke", "#444");
+    xAxisLine.setAttribute("stroke-width", "1");
+    xAxis.appendChild(xAxisLine);
 
-    // Add data point hover functionality
-    dataPoint.dataset.value = value;
-    dataPoint.dataset.label = data.labels[i];
-    dataPoint.addEventListener("mouseover", function (event) {
-      // Visual feedback
-      this.setAttribute("r", "7");
+    // Create y-axis ticks
+    const tickCount = 5;
+    const tickStep = maxValue / (tickCount - 1);
 
-      // Show tooltip
-      const tooltip = document.querySelector(".chart-tooltip");
-      tooltip.textContent = `${this.dataset.label}: ${this.dataset.value} ${
-        activeMetric === "attendance" ? "attendees" : "registrations"
-      }`;
-      tooltip.style.opacity = "1";
+    for (let i = 0; i < tickCount; i++) {
+      const tickValue = Math.round(i * tickStep);
+      const yPos = height - padding.bottom - tickValue * yScale;
 
-      // Position tooltip
-      tooltip.style.left = `${event.pageX}px`;
-      tooltip.style.top = `${event.pageY - 30}px`;
+      // Tick mark
+      const tick = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      tick.setAttribute("x1", padding.left - 5);
+      tick.setAttribute("y1", yPos);
+      tick.setAttribute("x2", padding.left);
+      tick.setAttribute("y2", yPos);
+      tick.setAttribute("stroke", "#888");
+      tick.setAttribute("stroke-width", "1");
+      yAxis.appendChild(tick);
+
+      // Tick label
+      const label = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "text"
+      );
+      label.setAttribute("x", padding.left - 8);
+      label.setAttribute("y", yPos + 4);
+      label.setAttribute("text-anchor", "end");
+      label.setAttribute("font-size", "10");
+      label.setAttribute("fill", "#888");
+      label.textContent = tickValue;
+      yAxis.appendChild(label);
+
+      // Horizontal grid line
+      const gridLine = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "line"
+      );
+      gridLine.setAttribute("x1", padding.left);
+      gridLine.setAttribute("y1", yPos);
+      gridLine.setAttribute("x2", width - padding.right);
+      gridLine.setAttribute("y2", yPos);
+      gridLine.setAttribute("stroke", "#444");
+      gridLine.setAttribute("stroke-width", "0.5");
+      gridLine.setAttribute("stroke-dasharray", "3,3");
+      yAxis.appendChild(gridLine);
+    }
+
+    // Add x-axis labels
+    data.labels.forEach((label, i) => {
+      const xPos = padding.left + i * xStep;
+
+      // Tick mark
+      const tick = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      tick.setAttribute("x1", xPos);
+      tick.setAttribute("y1", height - padding.bottom);
+      tick.setAttribute("x2", xPos);
+      tick.setAttribute("y2", height - padding.bottom + 5);
+      tick.setAttribute("stroke", "#888");
+      tick.setAttribute("stroke-width", "1");
+      xAxis.appendChild(tick);
+
+      // Label
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", xPos);
+      text.setAttribute("y", height - padding.bottom + 20);
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("font-size", "10");
+      text.setAttribute("fill", "#888");
+      text.textContent = label;
+      xAxis.appendChild(text);
     });
 
-    dataPoint.addEventListener("mouseout", function () {
-      this.setAttribute("r", "5");
+    svg.appendChild(xAxis);
+    svg.appendChild(yAxis);
 
-      // Hide tooltip
-      const tooltip = document.querySelector(".chart-tooltip");
-      tooltip.style.opacity = "0";
-    });
-
-    svg.appendChild(dataPoint);
-  });
-
-  // Create optional comparison line (previous period)
-  const comparePeriod = document.getElementById(
-    "analytics-compare-period"
-  ).value;
-  if (comparePeriod !== "none") {
-    const comparisonLine = document.createElementNS(
+    // Create line for current period
+    const currentLine = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "path"
     );
-    let compPathD = `M ${padding.left} ${
-      height - padding.bottom - data.previousPeriod[0] * yScale
+    let pathD = `M ${padding.left} ${
+      height - padding.bottom - data.values[0] * yScale
     }`;
 
     // Add path points
-    data.previousPeriod.forEach((value, i) => {
+    data.values.forEach((value, i) => {
       const x = padding.left + i * xStep;
       const y = height - padding.bottom - value * yScale;
-      compPathD += ` L ${x} ${y}`;
+      pathD += ` L ${x} ${y}`;
     });
 
-    comparisonLine.setAttribute("d", compPathD);
-    comparisonLine.setAttribute("fill", "none");
-    comparisonLine.setAttribute("stroke", "#444");
-    comparisonLine.setAttribute("stroke-width", "2");
-    comparisonLine.setAttribute("stroke-dasharray", "5,5");
-    svg.appendChild(comparisonLine);
+    currentLine.setAttribute("d", pathD);
+    currentLine.setAttribute("fill", "none");
+    currentLine.setAttribute("stroke", "#7e57c2");
+    currentLine.setAttribute("stroke-width", "3");
+    svg.appendChild(currentLine);
 
-    // Add data points for comparison
-    data.previousPeriod.forEach((value, i) => {
+    // Add data points with hover effect
+    data.values.forEach((value, i) => {
       const x = padding.left + i * xStep;
       const y = height - padding.bottom - value * yScale;
 
@@ -431,23 +367,23 @@ function drawAttendanceLineChart() {
       );
       dataPoint.setAttribute("cx", x);
       dataPoint.setAttribute("cy", y);
-      dataPoint.setAttribute("r", "3");
-      dataPoint.setAttribute("fill", "#444");
+      dataPoint.setAttribute("r", "5");
+      dataPoint.setAttribute("fill", "#7e57c2");
       dataPoint.setAttribute("stroke", "#fff");
-      dataPoint.setAttribute("stroke-width", "1");
+      dataPoint.setAttribute("stroke-width", "2");
 
-      // Add hover functionality
+      // Add data point hover functionality
       dataPoint.dataset.value = value;
       dataPoint.dataset.label = data.labels[i];
       dataPoint.addEventListener("mouseover", function (event) {
         // Visual feedback
-        this.setAttribute("r", "5");
+        this.setAttribute("r", "7");
 
         // Show tooltip
         const tooltip = document.querySelector(".chart-tooltip");
-        tooltip.textContent = `${this.dataset.label} (Previous): ${
-          this.dataset.value
-        } ${activeMetric === "attendance" ? "attendees" : "registrations"}`;
+        tooltip.textContent = `${this.dataset.label}: ${this.dataset.value} ${
+          activeMetric === "attendance" ? "attendees" : "registrations"
+        }`;
         tooltip.style.opacity = "1";
 
         // Position tooltip
@@ -456,7 +392,7 @@ function drawAttendanceLineChart() {
       });
 
       dataPoint.addEventListener("mouseout", function () {
-        this.setAttribute("r", "3");
+        this.setAttribute("r", "5");
 
         // Hide tooltip
         const tooltip = document.querySelector(".chart-tooltip");
@@ -465,7 +401,81 @@ function drawAttendanceLineChart() {
 
       svg.appendChild(dataPoint);
     });
-  }
+
+    // Create optional comparison line (previous period)
+    const comparePeriod = document.getElementById(
+      "analytics-compare-period"
+    ).value;
+    if (comparePeriod !== "none") {
+      const comparisonLine = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+      let compPathD = `M ${padding.left} ${
+        height - padding.bottom - data.previousPeriod[0] * yScale
+      }`;
+
+      // Add path points
+      data.previousPeriod.forEach((value, i) => {
+        const x = padding.left + i * xStep;
+        const y = height - padding.bottom - value * yScale;
+        compPathD += ` L ${x} ${y}`;
+      });
+
+      comparisonLine.setAttribute("d", compPathD);
+      comparisonLine.setAttribute("fill", "none");
+      comparisonLine.setAttribute("stroke", "#444");
+      comparisonLine.setAttribute("stroke-width", "2");
+      comparisonLine.setAttribute("stroke-dasharray", "5,5");
+      svg.appendChild(comparisonLine);
+
+      // Add data points for comparison
+      data.previousPeriod.forEach((value, i) => {
+        const x = padding.left + i * xStep;
+        const y = height - padding.bottom - value * yScale;
+
+        const dataPoint = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+        dataPoint.setAttribute("cx", x);
+        dataPoint.setAttribute("cy", y);
+        dataPoint.setAttribute("r", "3");
+        dataPoint.setAttribute("fill", "#444");
+        dataPoint.setAttribute("stroke", "#fff");
+        dataPoint.setAttribute("stroke-width", "1");
+
+        // Add hover functionality
+        dataPoint.dataset.value = value;
+        dataPoint.dataset.label = data.labels[i];
+        dataPoint.addEventListener("mouseover", function (event) {
+          // Visual feedback
+          this.setAttribute("r", "5");
+
+          // Show tooltip
+          const tooltip = document.querySelector(".chart-tooltip");
+          tooltip.textContent = `${this.dataset.label} (Previous): ${
+            this.dataset.value
+          } ${activeMetric === "attendance" ? "attendees" : "registrations"}`;
+          tooltip.style.opacity = "1";
+
+          // Position tooltip
+          tooltip.style.left = `${event.pageX}px`;
+          tooltip.style.top = `${event.pageY - 30}px`;
+        });
+
+        dataPoint.addEventListener("mouseout", function () {
+          this.setAttribute("r", "3");
+
+          // Hide tooltip
+          const tooltip = document.querySelector(".chart-tooltip");
+          tooltip.style.opacity = "0";
+        });
+
+        svg.appendChild(dataPoint);
+      });
+    }
+  }, 500); // Delay of 500ms to simulate loading
 }
 
 // Draw the engagement donut chart
@@ -474,126 +484,136 @@ function drawEngagementDonutChart() {
   const legendContainer = document.getElementById("engagement-legend");
 
   if (!svg || !legendContainer) return;
-
-  // Clear existing content
-  svg.innerHTML = "";
-  legendContainer.innerHTML = "";
-
-  // Ensure the SVG is set with proper viewBox and aspect ratio
-  svg.setAttribute("viewBox", "-1 -1 2 2");
-  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-  // Set explicit dimensions for the donut chart
-  svg.style.width = "100%";
-  svg.style.height = "250px"; // Updated to match our standardized height
-
-  // Ensure the chart maintains a good aspect ratio
-  const svgParent = svg.parentElement;
-  if (svgParent) {
-    const parentWidth = svgParent.offsetWidth;
-    if (parentWidth < 300) {
-      svg.style.height = `${parentWidth}px`;
-    }
+  
+  const chartContainer = svg.parentElement;
+  
+  // Show loading indicator
+  if (chartContainer && window.AURALoader) {
+    window.AURALoader.showInlineLoader(chartContainer);
   }
+  
+  // Add a small delay to simulate data loading
+  setTimeout(() => {
+    // Clear existing content
+    svg.innerHTML = "";
+    legendContainer.innerHTML = "";
 
-  const data = analyticsData.engagementSources;
+    // Ensure the SVG is set with proper viewBox and aspect ratio
+    svg.setAttribute("viewBox", "-1 -1 2 2");
+    svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    // Set explicit dimensions for the donut chart
+    svg.style.width = "100%";
+    svg.style.height = "250px"; // Updated to match our standardized height
 
-  // Calculate total for percentages
-  const total = data.reduce((acc, item) => acc + item.value, 0);
+    // Ensure the chart maintains a good aspect ratio
+    const svgParent = svg.parentElement;
+    if (svgParent) {
+      const parentWidth = svgParent.offsetWidth;
+      if (parentWidth < 300) {
+        svg.style.height = `${parentWidth}px`;
+      }
+    }
 
-  // Track start angle for creating arcs
-  let startAngle = 0;
+    const data = analyticsData.engagementSources;
 
-  // Create donut chart segments
-  data.forEach((item, index) => {
-    // Calculate angle
-    const angle = (item.value / total) * (2 * Math.PI);
+    // Calculate total for percentages
+    const total = data.reduce((acc, item) => acc + item.value, 0);
 
-    // Calculate end angle
-    const endAngle = startAngle + angle;
+    // Track start angle for creating arcs
+    let startAngle = 0;
 
-    // Create SVG arc path (using SVG path arc commands)
-    const largeArcFlag = angle > Math.PI ? 1 : 0;
+    // Create donut chart segments
+    data.forEach((item, index) => {
+      // Calculate angle
+      const angle = (item.value / total) * (2 * Math.PI);
 
-    // Calculate coordinates
-    const startX = Math.cos(startAngle) * 0.7; // 0.7 is the radius
-    const startY = Math.sin(startAngle) * 0.7;
-    const endX = Math.cos(endAngle) * 0.7;
-    const endY = Math.sin(endAngle) * 0.7;
+      // Calculate end angle
+      const endAngle = startAngle + angle;
 
-    // Create path
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    const pathData = [
-      `M ${startX} ${startY}`, // Move to start point
-      `A 0.7 0.7 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Draw arc
-      "L 0 0", // Line to center
-      "Z", // Close path
-    ].join(" ");
+      // Create SVG arc path (using SVG path arc commands)
+      const largeArcFlag = angle > Math.PI ? 1 : 0;
 
-    path.setAttribute("d", pathData);
-    path.setAttribute("fill", item.color);
-    path.setAttribute("stroke", "#181824");
-    path.setAttribute("stroke-width", "0.01");
+      // Calculate coordinates
+      const startX = Math.cos(startAngle) * 0.7; // 0.7 is the radius
+      const startY = Math.sin(startAngle) * 0.7;
+      const endX = Math.cos(endAngle) * 0.7;
+      const endY = Math.sin(endAngle) * 0.7;
 
-    // Interactive elements
-    path.dataset.label = item.label;
-    path.dataset.value = item.value;
-    path.dataset.percent = Math.round((item.value / total) * 100);
+      // Create path
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      const pathData = [
+        `M ${startX} ${startY}`, // Move to start point
+        `A 0.7 0.7 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Draw arc
+        "L 0 0", // Line to center
+        "Z", // Close path
+      ].join(" ");
 
-    path.addEventListener("mouseover", function (event) {
-      // Visual feedback
-      this.setAttribute("opacity", "0.8");
+      path.setAttribute("d", pathData);
+      path.setAttribute("fill", item.color);
+      path.setAttribute("stroke", "#181824");
+      path.setAttribute("stroke-width", "0.01");
 
-      // Show tooltip
-      const tooltip = document.querySelector(".chart-tooltip");
-      tooltip.textContent = `${this.dataset.label}: ${this.dataset.value} (${this.dataset.percent}%)`;
-      tooltip.style.opacity = "1";
+      // Interactive elements
+      path.dataset.label = item.label;
+      path.dataset.value = item.value;
+      path.dataset.percent = Math.round((item.value / total) * 100);
 
-      // Position tooltip
-      const rect = svg.getBoundingClientRect();
-      tooltip.style.left = `${rect.left + rect.width / 2}px`;
-      tooltip.style.top = `${rect.top + rect.height / 2 - 30}px`;
+      path.addEventListener("mouseover", function (event) {
+        // Visual feedback
+        this.setAttribute("opacity", "0.8");
+
+        // Show tooltip
+        const tooltip = document.querySelector(".chart-tooltip");
+        tooltip.textContent = `${this.dataset.label}: ${this.dataset.value} (${this.dataset.percent}%)`;
+        tooltip.style.opacity = "1";
+
+        // Position tooltip
+        const rect = svg.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + rect.width / 2}px`;
+        tooltip.style.top = `${rect.top + rect.height / 2 - 30}px`;
+      });
+
+      path.addEventListener("mouseout", function () {
+        this.setAttribute("opacity", "1");
+
+        // Hide tooltip
+        const tooltip = document.querySelector(".chart-tooltip");
+        tooltip.style.opacity = "0";
+      });
+
+      svg.appendChild(path);
+
+      // Update start angle for next segment
+      startAngle = endAngle;
+
+      // Add to legend
+      const legendItem = document.createElement("li");
+      const colorSquare = document.createElement("span");
+      colorSquare.classList.add("legend-color");
+      colorSquare.style.backgroundColor = item.color;
+
+      const legendText = document.createElement("span");
+      legendText.textContent = `${item.label} (${Math.round(
+        (item.value / total) * 100
+      )}%)`;
+
+      legendItem.appendChild(colorSquare);
+      legendItem.appendChild(legendText);
+      legendContainer.appendChild(legendItem);
     });
 
-    path.addEventListener("mouseout", function () {
-      this.setAttribute("opacity", "1");
-
-      // Hide tooltip
-      const tooltip = document.querySelector(".chart-tooltip");
-      tooltip.style.opacity = "0";
-    });
-
-    svg.appendChild(path);
-
-    // Update start angle for next segment
-    startAngle = endAngle;
-
-    // Add to legend
-    const legendItem = document.createElement("li");
-    const colorSquare = document.createElement("span");
-    colorSquare.classList.add("legend-color");
-    colorSquare.style.backgroundColor = item.color;
-
-    const legendText = document.createElement("span");
-    legendText.textContent = `${item.label} (${Math.round(
-      (item.value / total) * 100
-    )}%)`;
-
-    legendItem.appendChild(colorSquare);
-    legendItem.appendChild(legendText);
-    legendContainer.appendChild(legendItem);
-  });
-
-  // Add center circle to create donut hole
-  const centerCircle = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "circle"
-  );
-  centerCircle.setAttribute("cx", "0");
-  centerCircle.setAttribute("cy", "0");
-  centerCircle.setAttribute("r", "0.4"); // Adjust for desired hole size
-  centerCircle.setAttribute("fill", "#1f1f32");
-  centerCircle.setAttribute("stroke", "none");
-  svg.appendChild(centerCircle);
+    // Add center circle to create donut hole
+    const centerCircle = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle"
+    );
+    centerCircle.setAttribute("cx", "0");
+    centerCircle.setAttribute("cy", "0");
+    centerCircle.setAttribute("r", "0.4"); // Adjust for desired hole size
+    centerCircle.setAttribute("fill", "#1f1f32");
+    centerCircle.setAttribute("stroke", "none");
+    svg.appendChild(centerCircle);
+  }, 500); // Delay of 500ms to simulate loading
 }
 
 // Draw ROI & Cost analysis bar chart

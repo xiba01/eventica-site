@@ -21,6 +21,8 @@ window.addEventListener("load", function () {
     if (window.location.hash) {
       const targetPage = window.location.hash.substring(1);
       console.log("Found hash navigation request to:", targetPage);
+      
+      // Show loader before navigation (loading system will handle this)
       window.navigateTo(targetPage);
     }
   }, 100);
@@ -44,6 +46,9 @@ function initPageNavigation() {
 
       // Get the target page from data-page attribute
       const targetPage = this.getAttribute("data-page");
+      
+      // Show loader before page transition
+      AURALoader.showGlobalLoader(`Loading ${targetPage.charAt(0).toUpperCase() + targetPage.slice(1)}...`);
 
       // Hide all page containers
       hideAllPages();
@@ -56,6 +61,11 @@ function initPageNavigation() {
 
       // Update URL hash for history without triggering a page reload
       window.location.hash = targetPage;
+
+      // Hide loader after a short delay
+      setTimeout(() => {
+        AURALoader.hideGlobalLoader();
+      }, 500);
     });
   });
 }
@@ -169,16 +179,29 @@ function showPage(pageName) {
 // Global function to navigate to a specific page
 window.navigateTo = function (pageName) {
   console.log("Global navigation requested to:", pageName);
-  hideAllPages();
-  showPage(pageName);
-
-  // Update active nav link if possible
-  const navLink = document.querySelector(
-    `.nav-links a[data-page="${pageName}"]`
-  );
-  if (navLink) {
-    updateActiveNavLink(navLink);
-  }
+  
+  // Show loader with page-specific message
+  const formattedPageName = pageName.charAt(0).toUpperCase() + pageName.slice(1).replace(/-/g, ' ');
+  AURALoader.showGlobalLoader(`Loading ${formattedPageName}...`);
+  
+  // Slight delay to ensure loading animation is visible
+  setTimeout(() => {
+    hideAllPages();
+    showPage(pageName);
+    
+    // Update active nav link if possible
+    const navLink = document.querySelector(
+      `.nav-links a[data-page="${pageName}"]`
+    );
+    if (navLink) {
+      updateActiveNavLink(navLink);
+    }
+    
+    // Hide loader after page content is rendered
+    setTimeout(() => {
+      AURALoader.hideGlobalLoader();
+    }, 300);
+  }, 300);
 };
 
 // Function to update active state in navigation

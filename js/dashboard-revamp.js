@@ -63,42 +63,51 @@ function setDateTime() {
 // Initialize budget chart using Chart.js
 function initBudgetChart() {
   const budgetChartCanvas = document.getElementById("budget-chart");
+  const budgetChartContainer = budgetChartCanvas?.parentElement;
+  
   if (budgetChartCanvas && typeof Chart !== "undefined") {
-    const ctx = budgetChartCanvas.getContext("2d");
-    new Chart(ctx, {
-      type: "doughnut",
-      data: {
-        labels: ["Venues", "Catering", "Marketing", "Tech", "Remaining"],
-        datasets: [
-          {
-            data: [38000, 23750, 19000, 14250, 30000],
-            backgroundColor: [
-              "#9d6eff",
-              "#4b7bec",
-              "#45aaf2",
-              "#2ecc71",
-              "#2c2c44",
-            ],
-            borderWidth: 0,
-            cutout: "70%",
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            backgroundColor: "#1a1a2e",
-            titleColor: "#ffffff",
-            bodyColor: "#e0e0e0",
-            bodyFont: {
-              family: "Inter, sans-serif",
+    // Show loading indicator while the chart initializes
+    if (budgetChartContainer && window.AURALoader) {
+      window.AURALoader.showInlineLoader(budgetChartContainer);
+    }
+    
+    // Simulate data loading delay
+    setTimeout(() => {
+      const ctx = budgetChartCanvas.getContext("2d");
+      new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: ["Venues", "Catering", "Marketing", "Tech", "Remaining"],
+          datasets: [
+            {
+              data: [38000, 23750, 19000, 14250, 30000],
+              backgroundColor: [
+                "#9d6eff",
+                "#4b7bec",
+                "#45aaf2",
+                "#2ecc71",
+                "#2c2c44",
+              ],
+              borderWidth: 0,
+              cutout: "70%",
             },
-            titleFont: {
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              backgroundColor: "#1a1a2e",
+              titleColor: "#ffffff",
+              bodyColor: "#e0e0e0",
+              bodyFont: {
+                family: "Inter, sans-serif",
+              },
+              titleFont: {
               family: "Inter, sans-serif",
             },
             padding: 12,
