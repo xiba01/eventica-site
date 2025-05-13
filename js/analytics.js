@@ -620,7 +620,7 @@ function drawROICostChart() {
   // Calculate bar width based on container width and number of data points
   const numOfGroups = data.length;
   const groupSpacing = 10; // Space between groups in pixels
-  const availableWidth = containerWidth - (groupSpacing * (numOfGroups - 1));
+  const availableWidth = containerWidth - groupSpacing * (numOfGroups - 1);
   const groupWidth = Math.floor(availableWidth / numOfGroups);
   const barWidth = Math.min(18, Math.max(10, groupWidth / 3)); // Keep between 10-18px
 
@@ -914,13 +914,15 @@ function setupTooltips() {
 }
 
 // Add resize event listener to redraw charts when window is resized
-window.addEventListener('resize', function() {
+window.addEventListener("resize", function () {
   // Only redraw if analytics page is active
-  if (document.querySelector('.analytics-page-container') && 
-      document.querySelector('.analytics-page-container').style.display !== 'none') {
+  if (
+    document.querySelector(".analytics-page-container") &&
+    document.querySelector(".analytics-page-container").style.display !== "none"
+  ) {
     // Debounce the resize to prevent excessive redraws
     clearTimeout(window.resizeTimeout);
-    window.resizeTimeout = setTimeout(function() {
+    window.resizeTimeout = setTimeout(function () {
       drawAttendanceLineChart();
       drawEngagementDonutChart();
       drawROICostChart();

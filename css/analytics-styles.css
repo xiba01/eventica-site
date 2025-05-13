@@ -458,24 +458,24 @@ h5 .chart-tooltip-trigger {
   .charts-section {
     grid-template-columns: 1fr; /* Single column on small screens */
   }
-  
+
   .chart-container {
     min-height: 300px; /* Slightly taller on mobile */
     height: auto; /* Allow height to adjust */
     padding: 15px 10px; /* Reduce padding */
   }
-  
+
   .grouped-bar-chart-svg {
     overflow-x: auto; /* Allow horizontal scrolling */
     justify-content: flex-start; /* Start alignment for scrollable content */
     padding-bottom: 40px; /* Extra space for rotated labels */
   }
-  
+
   .bar-group {
     min-width: 35px; /* Even smaller on mobile */
     margin: 0 3px; /* Tighter spacing */
   }
-  
+
   .group-label {
     transform: rotate(-25deg); /* More rotation on small screens */
   }
