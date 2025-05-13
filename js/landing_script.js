@@ -363,7 +363,7 @@ function initTestimonialCarousel() {
  * Track demo button clicks (for analytics)
  */
 function trackDemoButtonClicks() {
-  const demoButtons = document.querySelectorAll('a[href="index.html"]');
+  const demoButtons = document.querySelectorAll('a[href="app.html"]');
 
   demoButtons.forEach((button) => {
     button.addEventListener("click", function (e) {
@@ -493,7 +493,7 @@ function initFloatingCTA() {
   // Create floating CTA
   const floatingCTA = document.createElement("a");
   floatingCTA.className = "floating-cta";
-  floatingCTA.href = "index.html";
+  floatingCTA.href = "app.html";
   floatingCTA.innerHTML = `
     <span>View Demo</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

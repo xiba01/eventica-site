@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventica - AI-Event Orchestrator</title>    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard-revamp.css" />
+    <link rel="stylesheet" href="css/wizard-styles.css" />
+    <link rel="stylesheet" href="css/settings-styles.css" />
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />    <!-- Chart.js for Dashboard Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Main Application Scripts -->
+    <script src="js/dashboard-revamp.js" defer></script>
+    <script src="js/analytics.js" defer></script>
+    <script src="js/resources.js" defer></script>
+    <script src="js/settings.js" defer></script>
+    <script src="js/script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <nav class="sidebar-nav">
+        <!-- Logo/App Name -->
+        <div class="logo-container">
+          <svg width="30" height="30" viewBox="0 0 621 617" fill="currentColor">
+            <path
+              d="m144.2 165.5q5.6 0 11.1 0 12 0 24 0.2c11.5 0.2 23.1 0.2 34.6 0.3q28.1 0.1 56.2 0.4 27.2 0.3 54.5 0.5 1.7 0 3.4 0 8.4 0.1 16.9 0.1 70 0.4 139.9 1.2c-1.7 5.2-3.4 9.8-6.2 14.5-1.1 1.8-1.1 1.8-2.1 3.5q-1.2 1.9-2.3 3.8-2.5 4.1-4.9 8.2c-1.3 2.1-1.3 2.1-2.6 4.3-4.5 7.5-8.8 15-13.1 22.6-1.3 2.2-1.3 2.2-2.7 4.5q-6.2 10.9-12.4 21.7c-1.1 2-1.1 2-2.3 4q-2 3.7-4.1 7.3-0.9 1.6-1.9 3.3-0.8 1.4-1.6 2.8-1 1.7-2 3.4-0.4 1.3-0.9 2.7c-1.5 3.7-2.9 5.7-6 8.4-7.4 1.7-14.9 1.4-22.5 1.2q-3.5 0-7 0-9.5 0-19-0.1c-6.6-0.1-13.3-0.1-19.9-0.1q-18.8-0.1-37.6-0.2-21.4-0.2-42.8-0.3-44-0.2-88.1-0.5 2 3.6 4 7.3 1.1 2 2.3 4.1c4.1 7.5 8.3 14.8 12.5 22.2q0.7 1.3 1.5 2.6c9.2 16.2 18.7 32.2 28.2 48.3 7.6-7.2 12.3-17.3 16.7-26.6 2.6-5.4 5.9-10.2 9.3-15 2-2.9 2-2.9 3.1-6.9 45.3 0 90.5 0 137.2 0-1.5 6-4.1 10.7-7.1 16q-0.9 1.5-1.7 3c-4 6.8-8.1 13.5-12.4 20.1-2.2 3.5-4.2 7.1-6.2 10.8-4.8 8.8-9.8 17.6-14.8 26.3q-1.5 2.6-2.9 5.1c-25.5 44.5-25.5 44.5-38.5 66.4-5.7 9.8-11.3 19.7-16.8 29.6-3.7 6.6-7.5 13.1-11.6 19.5-2.3 3.8-4.5 7.7-6.7 11.7-4.5 8.2-9.3 16.3-14.1 24.4-4.2 7.2-8.4 14.4-12.4 21.7-3 5.4-6.1 10.8-9.2 16.1-1 1.7-1 1.7-2 3.5-4.6 7.9-9.3 15.8-14 23.6-3.9-3.4-6.1-7.2-8.5-11.7q-1.3-2.2-2.5-4.5-1.3-2.3-2.6-4.7c-5.9-10.7-11.9-21.3-18.3-31.7q-2.3-4-4.6-7.9c-3.7-6.5-7.6-12.9-11.4-19.2-4.3-7.2-8.4-14.4-12.4-21.8-3.2-5.7-6.7-11.3-10.2-16.9-3.2-5.2-6.1-10.7-9.1-16.1q-15.6-28.7-32.6-56.7c-4.3-6.9-8.4-13.8-12.2-20.9q-6.2-11.3-12.5-22.5c-1.2-2-1.2-2-2.3-4.1-5.9-10.4-11.9-20.7-17.9-30.9q-4.5-7.7-9-15.3-3.5-6.1-7.1-12.2-3.9-6.6-7.8-13.2c-1.1-2-1.1-2-2.3-3.9q-1.1-1.9-2.1-3.7-1-1.6-1.9-3.2c-1.4-3.9-1-6 0.3-10 1.4-3.1 1.4-3.1 3.3-6.3 1-1.8 1-1.8 2.1-3.6 1.1-1.8 1.1-1.8 2.2-3.7 1.1-2 1.1-2 2.2-4q7.5-12.7 15.1-25.3c3.5-5.8 6.8-11.7 10-17.7 3.4-6.2 6.9-12.3 10.4-18.5q1-1.7 2-3.4 2-3.6 4.2-7.1c1.9-3.5 3.3-6.7 4.7-10.4 9.4-22.9 25.5-20.9 47.8-20.4z"
+            />
+            <path
+              d="m240.1 0.2q5.6 0 11.1 0 12 0 24 0.2c11.5 0.2 23 0.3 34.5 0.3q28.1 0.1 56.2 0.6 27.2 0.3 54.4 0.5 1.7 0 3.4 0 8.5 0.1 16.9 0.1c46.6 0.3 93.2 0.8 139.8 1.4-1.9 4.9-4 9.4-6.5 13.9q-1.1 2-2.3 4.1-1.2 2.2-2.5 4.4-1.2 2.3-2.5 4.6c-7.3 12.8-14.7 25.4-22.2 38-7.3 12.2-14.3 24.6-21.2 37q-1.1 2-2.2 4-1 1.7-1.9 3.5-1.2 2-2.4 4.1-0.8 1.7-1.5 3.4c-4.8 9.7-4.8 9.7-10.1 11.8-4 0.4-7.9 0.5-12 0.3q-2.3 0.1-4.7 0.1c-5.2 0-10.4-0.1-15.6-0.1q-5.5 0-11.1 0-12 0-24-0.2-17.3-0.1-34.7-0.1-28.1-0.1-56.2-0.3-27.4-0.2-54.7-0.3c-1.7 0-1.7 0-3.4 0q-8.4 0-16.9 0-70.1-0.2-140.2-0.7c1.9-6.1 4.3-11.3 7.6-16.8 0.7-1.2 0.7-1.2 1.4-2.4q2.2-3.7 4.5-7.4 2.9-4.9 5.9-9.8 0.7-1.1 1.4-2.4c3.7-6.2 7.2-12.5 10.6-18.9 2.4-4.2 4.8-8.5 7.2-12.7q1.4-2.5 2.9-5c0.7-1.2 0.7-1.2 1.4-2.5q2-3.5 4-7 2.6-4.6 5.3-9.1c2.4-4.2 4.3-8.3 6.1-12.7 11.1-24.6 25.1-24.6 50.2-23.9z"
+            />
+          </svg>
+          <span class="app-name">Eventica</span>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+          <li>
+            <a href="#" class="active" data-page="dashboard">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+                />
+              </svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-page="events">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+                />
+              </svg>
+              <span>Events</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-page="new-event">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+              </svg>
+              <span>New Event Spark</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-page="resources">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"
+                />
+              </svg>
+              <span>Resources</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-page="analytics">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4zm2.5 2.1h-15V5h15v14.1zm0-16.1h-15c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                />
+              </svg>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" data-page="settings">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"
+                />
+              </svg>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- User Profile Section -->
+        <div class="user-profile">
+          <div class="avatar"></div>
+          <div class="user-info">
+            <span class="user-name">Mostafa Chiba</span>
+            <a href="#" class="logout">Logout</a>
+          </div>
+        </div>
+      </nav>
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Dashboard Content -->
+        <div id="dashboard-content">
+          <h1>Dashboard</h1>
+
+          <!-- Welcome Header -->
+          <div class="welcome-header">
+            <div>
+              <h2 id="greeting">Good morning, Mostafa</h2>
+              <p class="date-time-display">January 15, 2024 - 10:30 AM</p>
+            </div>
+            <button class="btn btn-primary quick-spark-event">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 2.5l1.09 2.73L16 6.32l-2.73 1.09L12.18 10l-1.09-2.73L8 6.32l2.73-1.09L12 2.5zm6.06 6.56l-1.09 2.73L14 12.82l2.73 1.09L18.06 16l1.09-2.73L22 12.82l-2.73-1.09L18.06 9.06zM6.06 9.06L5 11.79L2 12.82l2.73 1.09L6.06 16l1.09-2.73L10 12.82l-2.73-1.09L6.06 9.06zM13 17h-2v-4H7v-2h4V7h2v4h4v2h-4v4z"
+                />
+              </svg>
+              Create New Event Spark
+            </button>
+          </div>
+          <!-- Dashboard Grid -->
+          <div class="dashboard-grid">
+            <!-- AURA Quick Interaction -->
+            <div class="dashboard-card aura-quick-interaction">
+              <div class="aura-interaction-header">
+                <h3><span class="aura-highlight">Eventica</span> Assistant</h3>
+                <div class="aura-pulse"></div>
+              </div>
+              <div class="aura-interaction-input">
+                <input
+                  type="text"
+                  id="aura-command-input"
+                  placeholder="Ask Eventica anything about your events..."
+                />
+                <button class="aura-send-btn">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="aura-suggestion-chips">
+                <span class="suggestion-chip">Budget overview</span>
+                <span class="suggestion-chip">Upcoming deadlines</span>
+                <span class="suggestion-chip">Vendor recommendations</span>
+                <span class="suggestion-chip">Task priorities</span>
+              </div>
+              <div class="aura-response-area">
+                <p id="aura-response">
+                  How can I assist with your event planning today?
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 1: Upcoming Events - Enhanced -->
+            <div class="dashboard-card upcoming-events-enhanced">
+              <h3>Upcoming Events</h3>
+              <div class="upcoming-events-list">
+                <div class="event-item">
+                  <div class="event-date">
+                    <span class="event-month">JUN</span>
+                    <span class="event-day">15</span>
+                  </div>
+                  <div class="event-details">
+                    <h4>AI Summit 2024</h4>
+                    <p>Tech Center, Downtown • 250 attendees</p>
+                    <div class="event-progress">
+                      <div class="progress-bar" style="width: 75%"></div>
+                      <span class="progress-text">75% Ready</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="event-item">
+                  <div class="event-date">
+                    <span class="event-month">JUL</span>
+                    <span class="event-day">28</span>
+                  </div>
+                  <div class="event-details">
+                    <h4>Tech Conference Q2</h4>
+                    <p>Virtual Event • 500 attendees</p>
+                    <div class="event-progress">
+                      <div class="progress-bar" style="width: 45%"></div>
+                      <span class="progress-text">45% Ready</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="event-item">
+                  <div class="event-date">
+                    <span class="event-month">AUG</span>
+                    <span class="event-day">10</span>
+                  </div>
+                  <div class="event-details">
+                    <h4>Startup Pitch Night</h4>
+                    <p>Innovation Hub • 120 attendees</p>
+                    <div class="event-progress">
+                      <div class="progress-bar" style="width: 25%"></div>
+                      <span class="progress-text">25% Ready</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="card-link">View All Events &rarr;</a>
+            </div>
+
+            <!-- Card 2: Budget Snapshot -->
+            <div class="dashboard-card budget-snapshot">
+              <h3>Budget Snapshot</h3>
+              <div class="budget-overview">
+                <div class="budget-chart-container">
+                  <canvas id="budget-chart"></canvas>
+                </div>
+                <div class="budget-stats">
+                  <div class="budget-stat">
+                    <span class="stat-label">Total Budget</span>
+                    <span class="stat-value">$125,000</span>
+                  </div>
+                  <div class="budget-stat">
+                    <span class="stat-label">Allocated</span>
+                    <span class="stat-value">$95,000</span>
+                  </div>
+                  <div class="budget-stat">
+                    <span class="stat-label">Remaining</span>
+                    <span class="stat-value">$30,000</span>
+                  </div>
+                </div>
+              </div>
+              <div class="budget-breakdown">
+                <div class="breakdown-item">
+                  <span class="breakdown-label">Venues</span>
+                  <div class="breakdown-bar">
+                    <div class="breakdown-progress" style="width: 40%"></div>
+                  </div>
+                  <span class="breakdown-value">$38,000</span>
+                </div>
+                <div class="breakdown-item">
+                  <span class="breakdown-label">Catering</span>
+                  <div class="breakdown-bar">
+                    <div class="breakdown-progress" style="width: 25%"></div>
+                  </div>
+                  <span class="breakdown-value">$23,750</span>
+                </div>
+                <div class="breakdown-item">
+                  <span class="breakdown-label">Marketing</span>
+                  <div class="breakdown-bar">
+                    <div class="breakdown-progress" style="width: 20%"></div>
+                  </div>
+                  <span class="breakdown-value">$19,000</span>
+                </div>
+                <div class="breakdown-item">
+                  <span class="breakdown-label">Tech</span>
+                  <div class="breakdown-bar">
+                    <div class="breakdown-progress" style="width: 15%"></div>
+                  </div>
+                  <span class="breakdown-value">$14,250</span>
+                </div>
+              </div>
+              <button class="btn-secondary view-breakdown">
+                View Detailed Breakdown
+              </button>
+            </div>
+
+            <!-- Card 3: My Tasks -->
+            <div class="dashboard-card my-tasks">
+              <div class="card-header-with-actions">
+                <h3>My Tasks</h3>
+                <div class="task-filters">
+                  <span class="task-filter active" data-filter="all">All</span>
+                  <span class="task-filter" data-filter="urgent">Urgent</span>
+                  <span class="task-filter" data-filter="upcoming"
+                    >Upcoming</span
+                  >
+                  <span class="task-filter" data-filter="completed"
+                    >Completed</span
+                  >
+                </div>
+              </div>
+              <div class="tasks-list">
+                <div class="task-item urgent">
+                  <input type="checkbox" class="task-checkbox" id="task1" />
+                  <label for="task1">
+                    <span class="task-name"
+                      >Finalize AI Summit speakers list</span
+                    >
+                    <span class="task-due">Due tomorrow</span>
+                  </label>
+                  <span class="task-tag">AI Summit</span>
+                </div>
+                <div class="task-item upcoming">
+                  <input type="checkbox" class="task-checkbox" id="task2" />
+                  <label for="task2">
+                    <span class="task-name"
+                      >Review catering proposals for Tech Conference</span
+                    >
+                    <span class="task-due">Due in 3 days</span>
+                  </label>
+                  <span class="task-tag">Tech Conference</span>
+                </div>
+                <div class="task-item upcoming">
+                  <input type="checkbox" class="task-checkbox" id="task3" />
+                  <label for="task3">
+                    <span class="task-name"
+                      >Coordinate with marketing team on social media plan</span
+                    >
+                    <span class="task-due">Due Jun 5</span>
+                  </label>
+                  <span class="task-tag">All Events</span>
+                </div>
+                <div class="task-item completed">
+                  <input
+                    type="checkbox"
+                    class="task-checkbox"
+                    id="task4"
+                    checked
+                  />
+                  <label for="task4">
+                    <span class="task-name"
+                      >Book main venue for Startup Pitch Night</span
+                    >
+                    <span class="task-due">Completed</span>
+                  </label>
+                  <span class="task-tag">Startup Pitch</span>
+                </div>
+              </div>
+              <button class="btn-secondary add-task">+ Add Task</button>
+            </div>
+
+            <!-- Card 4: Event Activity Feed - Enhanced -->
+            <div class="dashboard-card activity-feed">
+              <h3>Event Activity Feed</h3>
+              <div class="activity-feed-list">
+                <div class="activity-feed-item">
+                  <div class="activity-icon update">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="activity-content">
+                    <p>
+                      <strong>AI Summit 2024:</strong> Budget increased by
+                      $5,000 for premium speakers
+                    </p>
+                    <span class="activity-time">Just now</span>
+                  </div>
+                </div>
+                <div class="activity-feed-item">
+                  <div class="activity-icon new">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                    </svg>
+                  </div>
+                  <div class="activity-content">
+                    <p>
+                      <strong>Tech Conference Q2:</strong> Added 2 new workshop
+                      sessions to the agenda
+                    </p>
+                    <span class="activity-time">2 hours ago</span>
+                  </div>
+                </div>
+                <div class="activity-feed-item">
+                  <div class="activity-icon alert">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="activity-content">
+                    <p>
+                      <strong>Startup Pitch Night:</strong> Venue capacity issue
+                      detected - needs review
+                    </p>
+                    <span class="activity-time">Yesterday</span>
+                  </div>
+                </div>
+                <div class="activity-feed-item">
+                  <div class="activity-icon success">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="activity-content">
+                    <p>
+                      <strong>AI Summit 2024:</strong> Keynote speaker Dr. Maya
+                      Chen confirmed
+                    </p>
+                    <span class="activity-time">2 days ago</span>
+                  </div>
+                </div>
+                <div class="activity-feed-item">
+                  <div class="activity-icon new">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                    </svg>
+                  </div>
+                  <div class="activity-content">
+                    <p>
+                      <strong>New Spark:</strong> "Green Tech Expo" created with
+                      sustainability focus
+                    </p>
+                    <span class="activity-time">3 days ago</span>
+                  </div>
+                </div>
+              </div>
+              <button class="btn-secondary load-more-activities">
+                Load More Activities
+              </button>
+            </div>
+
+            <!-- Card 5: AURA Insights - Enhanced -->
+            <div class="dashboard-card aura-insights">
+              <h3>Eventica Insights</h3>
+              <div class="insights-carousel">
+                <div class="insight-slide active">
+                  <p class="insight-text">
+                    "The AI Summit's current budget allocation leaves tech
+                    equipment underfunded. Consider rebalancing from the
+                    marketing category, which is 15% above industry average."
+                  </p>
+                  <div class="insight-actions">
+                    <button class="insight-action-btn">View Budget</button>
+                    <button class="insight-action-btn">Get Suggestions</button>
+                  </div>
+                </div>
+                <div class="insight-slide">
+                  <p class="insight-text">
+                    "Based on past events, you typically finalize speakers 45
+                    days before the event. Tech Conference Q2 is 58 days away -
+                    time to start outreach!"
+                  </p>
+                  <div class="insight-actions">
+                    <button class="insight-action-btn">Create Task</button>
+                    <button class="insight-action-btn">
+                      Speaker Templates
+                    </button>
+                  </div>
+                </div>
+                <div class="insight-slide">
+                  <p class="insight-text">
+                    "I've detected a 20% increase in sustainable venue requests
+                    in your industry. Your upcoming Green Tech Expo would
+                    benefit from highlighting eco-friendly practices."
+                  </p>
+                  <div class="insight-actions">
+                    <button class="insight-action-btn">Venue Options</button>
+                    <button class="insight-action-btn">
+                      Sustainability Tips
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-controls">
+                <span class="carousel-dot active"></span>
+                <span class="carousel-dot"></span>
+                <span class="carousel-dot"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Events Page Content -->
+        <div class="events-page-container" style="display: none">
+          <h1>My Events</h1>
+          <p class="page-subtitle">
+            Oversee all your event sparks and fully planned occasions. Filter,
+            sort, and dive into details.
+          </p>
+
+          <!-- Filter & Action Bar -->
+          <div class="events-filter-bar">
+            <div class="search-container">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5A6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                />
+              </svg>
+              <input
+                type="text"
+                id="event-search-input"
+                placeholder="Search events by name or tag..."
+              />
+            </div>
+            <select id="event-status-filter">
+              <option value="all">All Statuses</option>
+              <option value="spark">Spark (Ideation)</option>
+              <option value="planning">Planning</option>
+              <option value="live">Live</option>
+              <option value="completed">Completed</option>
+              <option value="archived">Archived</option>
+            </select>
+            <select id="event-type-filter">
+              <option value="all">All Types</option>
+              <option value="Conference">Conference</option>
+              <option value="Workshop">Workshop</option>
+              <option value="Competition">Competition</option>
+              <option value="Webinar">Webinar</option>
+              <option value="Expo/Trade Show">Expo/Trade Show</option>
+              <option value="Festival/Consumer">Festival/Consumer</option>
+            </select>
+            <button class="btn btn-tertiary" id="sort-by-date">
+              Sort by Date
+            </button>
+            <button class="btn btn-primary" id="go-to-new-spark-from-events">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+              </svg>
+              New Event Spark
+            </button>
+          </div>
+
+          <!-- Events Display Area -->
+          <div class="events-grid">
+            <!-- Example Event Card (Static for styling reference) -->
+            <div class="event-list-card" data-event-id="spark123">
+              <div class="event-card-main-info">
+                <h3 class="event-card-name">AI for Good Pitch-Off</h3>
+                <span class="event-card-status status-spark">Spark</span>
+              </div>
+              <p class="event-card-type">Type: Competition</p>
+              <p class="event-card-dates">Dates: TBD (Spark Phase)</p>
+              <p class="event-card-attendees">
+                Attendees: Approx. 200 (Estimate)
+              </p>
+              <div class="event-card-tags">
+                <span class="tag">AI</span>
+                <span class="tag">Social Impact</span>
+              </div>
+              <div class="event-card-actions">
+                <button class="btn btn-secondary view-spark-details">
+                  View Spark
+                </button>
+                <button class="btn btn-primary manage-event-btn">
+                  Manage Event
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- No Events Message -->
+          <div class="no-events-message" style="display: none">
+            <p>
+              No events match your current filters. Try adjusting them or create
+              a New Event Spark!
+            </p>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13zM10.03 12.21c-.05.27-.19.49-.39.65s-.46.27-.77.32c-.3.04-.6-.01-.88-.15s-.5-.36-.66-.61c-.15-.26-.22-.55-.22-.87s.07-.6.2-.85c.14-.24.33-.43.58-.56s.53-.2.83-.2c.32 0 .6.06.84.19s.43.31.57.53c.14.22.22.47.22.76A1.87 1.87 0 0110.03 12.21z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Resources Page Content -->
+        <div class="resources-page-container" style="display: none">
+          <h1>Resource Hub</h1>
+          <p class="page-subtitle">
+            Find and manage all your event resources, from venues to vendors.
+            Let Eventica assist you.
+          </p>
+
+          <!-- Sub-Navigation/Tabs -->
+          <div class="resources-tabs">
+            <button class="tab-btn active" data-tab="venue-matching">
+              Smart Venue Matching
+            </button>
+            <button class="tab-btn" data-tab="vendor-catalog">
+              Vendor Catalog (Coming Soon)
+            </button>
+            <button class="tab-btn" data-tab="templates-blueprints">
+              Templates & Blueprints (Coming Soon)
+            </button>
+          </div>
+
+          <!-- Venue Matching Content Area -->
+          <div class="venue-matching-content tab-content active">
+            <h2>Find the Perfect Venue</h2>
+
+            <!-- Filter Panel -->
+            <div class="venue-filter-panel">
+              <div class="filter-group">
+                <label for="venue-location">Location (City/Region):</label>
+                <input
+                  type="text"
+                  id="venue-location"
+                  placeholder="e.g., San Francisco, CA"
+                />
+              </div>
+
+              <div class="filter-group">
+                <label for="venue-capacity">Capacity (Min Attendees):</label>
+                <input
+                  type="number"
+                  id="venue-capacity"
+                  placeholder="e.g., 500"
+                  min="10"
+                />
+              </div>
+
+              <div class="filter-group">
+                <label for="venue-type-filter-resources">Venue Type:</label>
+                <select id="venue-type-filter-resources">
+                  <option value="all">Any Type</option>
+                  <option value="conference_center">Conference Center</option>
+                  <option value="hotel_ballroom">Hotel Ballroom</option>
+                  <option value="auditorium">Auditorium</option>
+                  <option value="unique_space">
+                    Unique Space (e.g., gallery, warehouse)
+                  </option>
+                  <option value="outdoor">Outdoor Area</option>
+                  <option value="virtual_platform">Virtual Platform</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="venue-budget">Budget per Day (Max USD):</label>
+                <input
+                  type="number"
+                  id="venue-budget"
+                  placeholder="e.g., 10000"
+                  step="500"
+                />
+              </div>
+
+              <div class="filter-group amenities-group">
+                <label>Key Amenities (select multiple):</label>
+                <div class="amenities-checkboxes">
+                  <span
+                    ><input type="checkbox" id="amenity-av" value="av" /><label
+                      for="amenity-av"
+                      >A/V Equipment</label
+                    ></span
+                  >
+                  <span
+                    ><input
+                      type="checkbox"
+                      id="amenity-catering"
+                      value="catering"
+                    /><label for="amenity-catering"
+                      >Catering Services</label
+                    ></span
+                  >
+                  <span
+                    ><input
+                      type="checkbox"
+                      id="amenity-parking"
+                      value="parking"
+                    /><label for="amenity-parking">Parking</label></span
+                  >
+                  <span
+                    ><input
+                      type="checkbox"
+                      id="amenity-wifi"
+                      value="wifi"
+                    /><label for="amenity-wifi">High-Speed WiFi</label></span
+                  >
+                  <span
+                    ><input
+                      type="checkbox"
+                      id="amenity-accessible"
+                      value="accessible"
+                    /><label for="amenity-accessible"
+                      >Accessibility</label
+                    ></span
+                  >
+                </div>
+              </div>
+
+              <button class="btn btn-primary" id="search-venues-btn">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                  />
+                </svg>
+                Search Venues
+              </button>
+            </div>
+
+            <!-- Venue Results Area -->
+            <div class="venue-results-area" style="display: none">
+              <h3>Matching Venues <span id="venue-results-count">(0)</span></h3>
+
+              <div class="venue-results-grid">
+                <!-- Example Venue Card (Will be populated by JS) -->
+                <div class="venue-result-card">
+                  <div
+                    class="venue-card-image"
+                    style="
+                      background-image: linear-gradient(
+                        135deg,
+                        #6a3093,
+                        #a044ff
+                      );
+                    "
+                  ></div>
+                  <div class="venue-card-details">
+                    <h4>The Grand Tech Pavilion</h4>
+                    <p class="venue-location-text">
+                      <svg viewBox="0 0 24 24">
+                        <path
+                          d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                        />
+                      </svg>
+                      Downtown Metropolis
+                    </p>
+                    <p class="venue-capacity-text">Capacity: up to 1200</p>
+                    <p class="venue-price-estimate">
+                      Est. Price: $8,000 - $12,000 per day
+                    </p>
+                    <div class="venue-card-tags">
+                      <span class="tag venue-type-tag">Conference Center</span>
+                      <span class="tag amenity-tag">A/V</span>
+                      <span class="tag amenity-tag">WiFi</span>
+                    </div>
+                    <button class="btn btn-secondary view-venue-details-btn">
+                      View Details & RFP
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="no-venues-found" style="display: none">
+                <p>
+                  No venues match your criteria. Try broadening your search!
+                </p>
+              </div>
+            </div>
+
+            <!-- AURA Suggestion Box -->
+            <div class="aura-suggestion-box resources-aura-suggestion">
+              <p class="aura-suggestion-text">
+                ✨ Eventica says: "Let me know your event's core needs, and I
+                can shortlist ideal venues, even pre-drafting RFPs for your top
+                choices!"
+              </p>
+            </div>
+          </div>
+
+          <!-- Other Tab Content Placeholders -->
+          <div class="vendor-catalog-content tab-content">
+            <h2>Vendor Catalog</h2>
+            <p>
+              Coming soon: A curated list of trusted AV suppliers, caterers, and
+              more.
+            </p>
+          </div>
+
+          <div class="templates-blueprints-content tab-content">
+            <h2>Templates & Blueprints</h2>
+            <p>
+              Coming soon: Reusable event plan templates and successful
+              blueprints from past events.
+            </p>
+          </div>
+        </div>
+
+        <!-- Analytics Page Content -->
+        <div class="analytics-page-container" style="display: none">
+          <h1>Event Performance Analytics</h1>
+          <p class="page-subtitle">
+            Gain actionable insights from your events. Track key metrics and
+            understand your impact.
+          </p>
+          <!-- Global Filter Bar -->
+          <div class="analytics-global-filter">
+            <label for="analytics-event-select">Analyze Data For:</label>
+            <select id="analytics-event-select">
+              <option value="all_events">All Events (Aggregated)</option>
+              <option value="evt001">Global Tech Summit 2025</option>
+              <option value="evt002">Local Art Workshop</option>
+            </select>
+
+            <div class="date-range-picker-container">
+              <label>Date Range:</label>
+              <button id="analytics-date-presets-btn">
+                Last 90 Days
+                <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" /></svg>
+              </button>
+              <div class="date-presets-dropdown" style="display: none">
+                <button data-range="7d">Last 7 Days</button>
+                <button data-range="30d">Last 30 Days</button>
+                <button data-range="90d">Last 90 Days</button>
+                <button data-range="ytd">Year to Date</button>
+                <button data-range="custom">Custom Range...</button>
+              </div>
+              <span id="custom-date-range-display"></span>
+            </div>
+
+            <label for="analytics-compare-period">Compare To:</label>
+            <select id="analytics-compare-period">
+              <option value="none">No Comparison</option>
+              <option value="prev_period">Previous Period</option>
+              <option value="prev_year">Same Period Last Year</option>
+            </select>
+          </div>
+          <!-- KPIs Overview Grid -->
+          <div class="kpi-overview-grid">
+            <!-- KPI Card 1: Attendance -->
+            <div class="kpi-card" data-kpi="attendance">
+              <h4>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  />
+                </svg>
+                Total Attendance
+              </h4>
+              <p class="kpi-value" id="kpi-total-attendance">1,850</p>
+              <p class="kpi-trend up">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+                </svg>
+                <span class="kpi-actual-change">+250</span> attendees (15% vs.
+                last period)
+              </p>
+            </div>
+
+            <!-- KPI Card 2: Engagement -->
+            <div class="kpi-card" data-kpi="engagement">
+              <h4>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"
+                  />
+                </svg>
+                Avg. Engagement Score
+              </h4>
+              <p class="kpi-value" id="kpi-avg-engagement">82%</p>
+              <p class="kpi-trend down">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
+                </svg>
+                <span class="kpi-actual-change">-4.3%</span> points (5% vs. last
+                period)
+              </p>
+            </div>
+
+            <!-- KPI Card 3: Leads -->
+            <div class="kpi-card" data-kpi="leads">
+              <h4>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M22 3H2C.9 3 0 3.9 0 5v14c0 1.1.9 2 2 2h20c1.1 0 1.99-.9 1.99-2L24 5c0-1.1-.9-2-2-2zm0 16H2V5h20v14zM21 6h-7v5h7V6zm-1 2l-2.5 1.75L15 8V7l2.5 1.75L20 7v1zM9 12c1.65 0 3-1.35 3-3s-1.35-3-3-3-3 1.35-3 3 1.35 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm6 8.59c0-2.5-3.97-3.58-6-3.58s-6 1.08-6 3.58V18h12v-1.41zM5.48 16c.74-.5 2.22-1 3.52-1s2.77.49 3.52 1H5.48z"
+                  />
+                </svg>
+                Leads Generated
+              </h4>
+              <p class="kpi-value" id="kpi-leads-generated">275</p>
+              <p class="kpi-trend up">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+                </svg>
+                <span class="kpi-actual-change">+45</span> leads (20% - Target
+                Met)
+              </p>
+            </div>
+
+            <!-- KPI Card 4: Budget -->
+            <div class="kpi-card" data-kpi="budget">
+              <h4>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"
+                  />
+                </svg>
+                Budget Adherence
+              </h4>
+              <p class="kpi-value" id="kpi-budget-adherence">-5%</p>
+              <p class="kpi-trend neutral">
+                $2,500 over budget (Acceptable variance)
+              </p>
+            </div>
+          </div>
+          <!-- Charts Section -->
+          <div class="charts-section">
+            <!-- Chart 1: Attendance Over Time (Line Chart) -->
+            <div class="chart-container interactive-chart">
+              <h5>
+                Attendance & Registrations Over Time
+                <span class="chart-tooltip-trigger">(i)</span>
+              </h5>
+              <div class="chart-controls">
+                <button
+                  class="chart-toggle-btn active"
+                  data-metric="attendance"
+                >
+                  Attendance
+                </button>
+                <button class="chart-toggle-btn" data-metric="registrations">
+                  Registrations
+                </button>
+              </div>
+              <svg
+                class="line-chart-svg"
+                id="attendance-line-chart"
+                viewBox="0 0 500 250"
+              >
+                <!-- JS will draw polyline, circles, and axes -->
+              </svg>
+            </div>
+
+            <!-- Chart 2: Engagement Breakdown (Donut Chart) -->
+            <div class="chart-container interactive-chart">
+              <h5>
+                Engagement Sources
+                <span class="chart-tooltip-trigger">(i)</span>
+              </h5>
+              <svg
+                class="donut-chart-svg"
+                id="engagement-donut-chart"
+                viewBox="-1 -1 2 2"
+                style="transform: rotate(-90deg)"
+              >
+                <!-- JS will draw circle segments for donut chart -->
+              </svg>
+              <ul class="chart-legend" id="engagement-legend">
+                <!-- JS will populate legend items -->
+              </ul>
+            </div>
+
+            <!-- Chart 3: ROI & Cost Analysis (Grouped Bar Chart) -->
+            <div class="chart-container interactive-chart">
+              <h5>
+                ROI & Cost Breakdown (Per Event Type)
+                <span class="chart-tooltip-trigger">(i)</span>
+              </h5>
+              <div class="grouped-bar-chart-svg" id="roi-cost-chart">
+                <!-- JS will populate bar groups -->
+              </div>
+            </div>
+
+            <!-- Chart 4: Feedback Word Cloud -->
+            <div class="chart-container">
+              <h5>
+                Attendee Feedback Sentiment
+                <span class="chart-tooltip-trigger">(i)</span>
+              </h5>
+              <div class="word-cloud-placeholder" id="feedback-word-cloud">
+                <!-- JS will populate with spans -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom Tooltip (Initially Hidden) -->
+          <div
+            class="chart-tooltip"
+            style="opacity: 0; position: absolute"
+          ></div>
+
+          <!-- AURA Suggestion Box -->
+          <div class="aura-suggestion-box analytics-aura-suggestion">
+            <p class="aura-suggestion-text">
+              ✨ Eventica says: "Your 'Avg. Engagement Score' dipped slightly.
+              Consider adding more interactive polls or Q&A sessions in future
+              events. I can help structure those!"
+            </p>
+          </div>
+        </div>
+
+        <!-- New Event Spark Wizard -->
+        <div class="spark-wizard-container" style="display: none">
+          <h1>Ignite Your Next Event</h1>
+          <p class="wizard-subtitle">
+            Let's craft the vision for your new event spark. Eventica will guide
+            you.
+          </p>
+
+          <!-- Progress Indicator -->
+          <div class="spark-progress-indicator">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+
+          <!-- Vision Board -->
+          <div class="vision-board">
+            <!-- Left Panel -->
+            <div class="vision-left-panel">
+              <!-- Event Name Input -->
+              <label for="event-name-input">Event Name:</label>
+              <input
+                type="text"
+                id="event-name-input"
+                placeholder="e.g., Future of AI Summit"
+              />
+
+              <!-- Keywords/Tags Section -->
+              <div class="keywords-section">
+                <label>Core Themes & Keywords (select up to 5):</label>
+                <div class="keywords-input-area">
+                  <span class="keyword-tag" data-keyword="Innovation"
+                    >Innovation</span
+                  >
+                  <span class="keyword-tag" data-keyword="Technology"
+                    >Technology</span
+                  >
+                  <span class="keyword-tag" data-keyword="Networking"
+                    >Networking</span
+                  >
+                  <span class="keyword-tag" data-keyword="AI">AI</span>
+                  <span class="keyword-tag" data-keyword="Robotics"
+                    >Robotics</span
+                  >
+                  <span class="keyword-tag" data-keyword="Workshop"
+                    >Workshop</span
+                  >
+                  <span class="keyword-tag" data-keyword="Conference"
+                    >Conference</span
+                  >
+                  <span class="keyword-tag" data-keyword="Sustainability"
+                    >Sustainability</span
+                  >
+                </div>
+                <p class="selected-keywords-count">0/5 selected</p>
+              </div>
+
+              <!-- Mood/Style Selector -->
+              <div class="mood-style-selector">
+                <label>Event Mood & Style:</label>
+                <div class="mood-cards-container">
+                  <div class="mood-card" data-mood="Sleek & Corporate">
+                    <div class="mood-card-image-placeholder"></div>
+                    <p>Sleek & Corporate</p>
+                  </div>
+                  <div class="mood-card" data-mood="Innovative & Edgy">
+                    <div class="mood-card-image-placeholder"></div>
+                    <p>Innovative & Edgy</p>
+                  </div>
+                  <div class="mood-card" data-mood="Collaborative & Warm">
+                    <div class="mood-card-image-placeholder"></div>
+                    <p>Collaborative & Warm</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="vision-right-panel">
+              <!-- Core Goals Section -->
+              <div class="goals-section">
+                <label>Primary Goals (distribute 100%):</label>
+                <div class="goal-slider">
+                  <span>Lead Generation</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="30"
+                    data-goal="leadGen"
+                  />
+                  <span class="goal-percentage">30%</span>
+                </div>
+                <div class="goal-slider">
+                  <span>Brand Awareness</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="40"
+                    data-goal="brandAwareness"
+                  />
+                  <span class="goal-percentage">40%</span>
+                </div>
+                <div class="goal-slider">
+                  <span>Attendee Engagement</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="30"
+                    data-goal="attendeeEngagement"
+                  />
+                  <span class="goal-percentage">30%</span>
+                </div>
+                <p class="total-goal-percentage">Total: 100%</p>
+              </div>
+
+              <!-- AURA Suggestion Box -->
+              <div class="aura-suggestion-box">
+                <p class="aura-suggestion-text">
+                  ✨ Eventica says: "Exciting! As you define your vision, I'll
+                  start gathering initial ideas for themes and formats."
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Scope & Scale Board (Screen 2) -->
+          <div class="scope-scale-board">
+            <!-- Left Panel -->
+            <div class="scope-left-panel">
+              <!-- Event Type Selector -->
+              <div class="event-type-selector">
+                <label>Event Type (select one):</label>
+                <div class="event-type-cards-container">
+                  <div class="event-type-card" data-type="Conference">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 3l-9 4.5v9L12 21l9-4.5v-9L12 3zm0 2.38L18.2 9 12 12.38 5.8 9 12 5.38zM11 14h2v5h-2v-5zM4 10.6l8 4 8-4V15l-8 4-8-4v-4.4z"
+                      />
+                    </svg>
+                    <p>Conference</p>
+                  </div>
+                  <div class="event-type-card" data-type="Workshop">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6zm2 2v2h8V8H6zm0 4v2h5v-2H6z"
+                      />
+                    </svg>
+                    <p>Workshop</p>
+                  </div>
+                  <div class="event-type-card" data-type="Competition">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"
+                      />
+                    </svg>
+                    <p>Competition</p>
+                  </div>
+                  <div class="event-type-card" data-type="Webinar">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M21 3H3c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.11-.9-2-2-2zm0 14H3V5h18v12z"
+                      />
+                    </svg>
+                    <p>Webinar</p>
+                  </div>
+                  <div class="event-type-card" data-type="Expo/Trade Show">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"
+                      />
+                    </svg>
+                    <p>Expo/Trade Show</p>
+                  </div>
+                  <div class="event-type-card" data-type="Festival/Consumer">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M16 5v8c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V5h10m4-2H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm-4 10v2H8v-2h8z"
+                      />
+                    </svg>
+                    <p>Festival/Consumer</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Event Format Selector -->
+              <div class="event-format-selector">
+                <label>Event Format:</label>
+                <div class="format-toggle">
+                  <button class="format-btn active" data-format="In-Person">
+                    In-Person
+                  </button>
+                  <button class="format-btn" data-format="Virtual">
+                    Virtual
+                  </button>
+                  <button class="format-btn" data-format="Hybrid">
+                    Hybrid
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="scope-right-panel">
+              <!-- Estimated Size Section -->
+              <div class="estimated-size-section">
+                <label for="attendee-count-slider"
+                  >Estimated Attendees/Participants:</label
+                >
+                <div class="slider-container">
+                  <input
+                    type="range"
+                    id="attendee-count-slider"
+                    min="10"
+                    max="10000"
+                    value="500"
+                    step="10"
+                  />
+                  <span id="attendee-count-display">500</span>
+                </div>
+
+                <!-- Conditional Input for Competitions -->
+                <div class="team-count-section" style="display: none">
+                  <label for="team-count-input"
+                    >Number of Teams (if competition):</label
+                  >
+                  <input
+                    type="number"
+                    id="team-count-input"
+                    min="2"
+                    max="500"
+                    placeholder="e.g., 50"
+                  />
+                </div>
+              </div>
+
+              <!-- Event Duration Section -->
+              <div class="event-duration-section">
+                <label for="event-duration-days">Event Duration (Days):</label>
+                <div class="duration-input-group">
+                  <button class="duration-btn minus">-</button>
+                  <input
+                    type="number"
+                    id="event-duration-days"
+                    value="3"
+                    min="1"
+                    max="30"
+                    readonly
+                  />
+                  <button class="duration-btn plus">+</button>
+                </div>
+              </div>
+
+              <!-- Target Budget Section -->
+              <div class="target-budget-section">
+                <label for="target-budget-slider"
+                  >Target Budget Range (USD):</label
+                >
+                <div class="slider-container">
+                  <span>$</span><span id="budget-min-display">10,000</span>
+                  <input
+                    type="range"
+                    id="target-budget-slider"
+                    min="1000"
+                    max="1000000"
+                    value="50000"
+                    step="1000"
+                  />
+                  <span>- $</span><span id="budget-max-display">150,000</span>
+                </div>
+              </div>
+
+              <!-- AURA Suggestion Box -->
+              <div class="aura-suggestion-box">
+                <p class="aura-suggestion-text">
+                  ✨ Eventica says: "Defining the scale helps me tailor venue
+                  suggestions and resource estimates. For a 3-day, 500-person
+                  conference, I'm already shortlisting suitable convention
+                  centers and AV packages."
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Theme Generation Board (Screen 3) -->
+          <div class="theme-generation-board">
+            <h2>Eventica's Theme Lab</h2>
+            <p class="wizard-subtitle">
+              Based on your vision, here are some initial theme concepts.
+              Explore, refine, or let Eventica conjure more!
+            </p>
+            <!-- Main Theme Display Area -->
+            <div class="theme-cards-container">
+              <!-- Example Theme Card 1 -->
+              <div class="theme-card" data-theme-id="1">
+                <div class="theme-card-header">
+                  <h3>AI for Good Pitch-Off</h3>
+                  <button class="favorite-btn">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <p class="theme-description">
+                  A high-energy competition focusing on startups using
+                  artificial intelligence to solve global challenges. Emphasizes
+                  social impact and innovation.
+                </p>
+                <div class="theme-tags">
+                  <span class="tag">AI</span>
+                  <span class="tag">Competition</span>
+                  <span class="tag">Social Impact</span>
+                </div>
+                <div class="theme-card-actions">
+                  <button class="btn btn-secondary refine-theme">
+                    Refine Details
+                  </button>
+                  <button class="btn btn-primary select-theme">
+                    Select This Theme
+                  </button>
+                </div>
+              </div>
+
+              <!-- Example Theme Card 2 -->
+              <div class="theme-card" data-theme-id="2">
+                <div class="theme-card-header">
+                  <h3>Green Tech Expo & Symposium</h3>
+                  <button class="favorite-btn">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <p class="theme-description">
+                  Showcasing cutting-edge sustainable technologies and fostering
+                  discussions on environmental solutions. Combines exhibition
+                  space with expert panels.
+                </p>
+                <div class="theme-tags">
+                  <span class="tag">Sustainability</span>
+                  <span class="tag">Expo</span>
+                  <span class="tag">Innovation</span>
+                  <span class="tag">Conference</span>
+                </div>
+                <div class="theme-card-actions">
+                  <button class="btn btn-secondary refine-theme">
+                    Refine Details
+                  </button>
+                  <button class="btn btn-primary select-theme">
+                    Select This Theme
+                  </button>
+                </div>
+              </div>
+
+              <!-- Theme Card 3 -->
+              <div class="theme-card" data-theme-id="3">
+                <div class="theme-card-header">
+                  <h3>Future of Work Summit</h3>
+                  <button class="favorite-btn">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <p class="theme-description">
+                  An immersive conference exploring how technology is
+                  transforming workplaces. Features hands-on workshops, keynotes
+                  from industry leaders, and networking opportunities focused on
+                  workplace innovation.
+                </p>
+                <div class="theme-tags">
+                  <span class="tag">Technology</span>
+                  <span class="tag">Networking</span>
+                  <span class="tag">Workshop</span>
+                  <span class="tag">Conference</span>
+                </div>
+                <div class="theme-card-actions">
+                  <button class="btn btn-secondary refine-theme">
+                    Refine Details
+                  </button>
+                  <button class="btn btn-primary select-theme">
+                    Select This Theme
+                  </button>
+                </div>
+              </div>
+
+              <!-- Theme Card 4 -->
+              <div class="theme-card" data-theme-id="4">
+                <div class="theme-card-header">
+                  <h3>Creative Tech Festival</h3>
+                  <button class="favorite-btn">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <p class="theme-description">
+                  A vibrant festival that bridges art and technology through
+                  interactive installations, performances, and collaborative
+                  projects. Designed to inspire creativity and showcase emerging
+                  digital art forms.
+                </p>
+                <div class="theme-tags">
+                  <span class="tag">Innovation</span>
+                  <span class="tag">Festival</span>
+                  <span class="tag">Art</span>
+                  <span class="tag">Technology</span>
+                </div>
+                <div class="theme-card-actions">
+                  <button class="btn btn-secondary refine-theme">
+                    Refine Details
+                  </button>
+                  <button class="btn btn-primary select-theme">
+                    Select This Theme
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="theme-action-bar">
+              <button id="regenerate-themes" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 6V2L8 6l4 4V6zm0 12v4l4-4-4-4v4zm6-6h4l-4 4-4-4h4zM6 12H2l4-4 4 4H6zm7.5-3.5L12 6V2l-1.5 1.5L9 2v4l-2.5-1.5L5 6l1.5 2.5L5 11l1.5 1.5L8 11v4l1.5 1.5L12 18v-4l2.5 1.5L16 14l-1.5-2.5L16 9l-1.5-1.5z"
+                  />
+                </svg>
+                Generate More Themes
+              </button>
+              <p id="generation-status">Eventica is conjuring new themes...</p>
+            </div>
+            <div class="selected-theme-preview">
+              <h4>Your Chosen Theme:</h4>
+              <p id="chosen-theme-name"></p>
+            </div>
+
+            <!-- AURA Suggestion Box -->
+            <div class="aura-suggestion-box">
+              <p class="aura-suggestion-text">
+                ✨ Eventica says: "Each theme comes with a potential structure.
+                'Refine Details' will let you tweak agendas, speaker archetypes,
+                and more. Or, we can explore completely new avenues!"
+              </p>
+            </div>
+          </div>
+
+          <!-- Blueprint Visualization Board (Screen 4) -->
+          <div class="blueprint-visualization-board">
+            <h2>Event Blueprint Visualization</h2>
+            <p class="wizard-subtitle">
+              Based on your selected theme and parameters, here's a visual
+              representation of your event structure.
+            </p>
+
+            <!-- Blueprint Canvas -->
+            <div class="blueprint-canvas">
+              <!-- Day Columns Container -->
+              <div class="day-columns-container">
+                <!-- Day columns will be generated dynamically by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Blueprint Legend -->
+            <div class="blueprint-legend">
+              <h4>Event Block Types:</h4>
+              <div class="legend-items">
+                <div class="legend-item">
+                  <span
+                    class="legend-color"
+                    style="background-color: #7e57c2"
+                  ></span>
+                  <span>Keynote Sessions</span>
+                </div>
+                <div class="legend-item">
+                  <span
+                    class="legend-color"
+                    style="background-color: #4caf50"
+                  ></span>
+                  <span>Workshops</span>
+                </div>
+                <div class="legend-item">
+                  <span
+                    class="legend-color"
+                    style="background-color: #2196f3"
+                  ></span>
+                  <span>Networking</span>
+                </div>
+                <div class="legend-item">
+                  <span
+                    class="legend-color"
+                    style="background-color: #ff9800"
+                  ></span>
+                  <span>Panels</span>
+                </div>
+                <div class="legend-item">
+                  <span
+                    class="legend-color"
+                    style="background-color: #f44336"
+                  ></span>
+                  <span>Special Events</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resource Summary Panel -->
+            <div class="resource-summary-panel">
+              <h4>Resource Summary:</h4>
+              <div class="resource-metrics">
+                <div class="resource-metric">
+                  <span class="metric-value" id="room-count">0</span>
+                  <span class="metric-label">Rooms Required</span>
+                </div>
+                <div class="resource-metric">
+                  <span class="metric-value" id="speaker-count">0</span>
+                  <span class="metric-label">Speakers</span>
+                </div>
+                <div class="resource-metric">
+                  <span class="metric-value" id="staff-count">0</span>
+                  <span class="metric-label">Staff Needed</span>
+                </div>
+                <div class="resource-metric">
+                  <span class="metric-value" id="estimated-cost">$0</span>
+                  <span class="metric-label">Est. Cost</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- AURA Suggestion Box -->
+            <div class="aura-suggestion-box">
+              <p class="aura-suggestion-text">
+                ✨ Eventica says: "This blueprint is a starting point! You can
+                refine your event schedule later or ask me to generate
+                alternatives based on different parameters."
+              </p>
+            </div>
+          </div>
+          <!-- Wizard Navigation Buttons -->
+          <div class="wizard-nav-buttons">
+            <button class="btn btn-secondary" id="cancel-spark">Cancel</button>
+            <button class="btn btn-primary" id="next-spark-step1">
+              Next: Define Scope & Scale &rarr;
+            </button>
+            <button class="btn btn-secondary" id="prev-spark-step1">
+              &larr; Previous: Vision
+            </button>
+            <button class="btn btn-primary" id="next-spark-step2">
+              Next: AI Theme Generation &rarr;
+            </button>
+            <button class="btn btn-secondary" id="prev-spark-step2">
+              &larr; Previous: Scope & Scale
+            </button>
+            <button class="btn btn-primary" id="next-spark-step3">
+              Next: Blueprint & Resources &rarr;
+            </button>
+            <button class="btn btn-secondary" id="prev-spark-step3">
+              &larr; Previous: Theme Generation
+            </button>
+            <button class="btn btn-primary" id="complete-spark">
+              Complete Spark
+            </button>
+          </div>
+        </div>
+        
+        <!-- Settings Page Container -->
+        <div class="settings-page-container" style="display: none;">
+          <h1>Settings</h1>
+          <p class="page-subtitle">Manage your profile, notification preferences, and application settings.</p>
+          
+          <!-- Profile Settings Section -->
+          <div class="settings-section profile-settings">
+            <h2>
+              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              Profile Information
+            </h2>
+              <div class="profile-avatar-section">
+              <img src="https://ui-avatars.com/api/?name=Mostafa+Chiba&background=7B68EE&color=fff" alt="User Avatar" id="profile-avatar-img">
+              <button class="btn btn-secondary" id="change-avatar-btn">Change Avatar</button>
+            </div>
+            
+            <div class="form-group">
+              <label for="profile-name">Full Name:</label>
+              <input type="text" id="profile-name" value="Mostafa Chiba">
+            </div>
+            
+            <div class="form-group">
+              <label for="profile-email">Email Address:</label>
+              <input type="email" id="profile-email" value="mostafa.chiba@example.com" disabled>
+              <small>Contact support to change your email.</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="profile-title">Job Title/Role:</label>
+              <input type="text" id="profile-title" value="Event Director">
+            </div>
+            
+            <button class="btn btn-primary" id="save-profile-btn">Save Profile Changes</button>
+          </div>
+          
+          <!-- Notification Settings Section -->
+          <div class="settings-section notification-settings">
+            <h2>
+              <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+              Notification Preferences
+            </h2>
+            
+            <div class="notification-option">
+              <label for="notify-event-updates">Event Updates (status changes, major milestones):</label>
+              <select id="notify-event-updates">
+                <option value="email_app">Email & In-App</option>
+                <option value="email_only">Email Only</option>
+                <option value="app_only">In-App Only</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            
+            <div class="notification-option">
+              <label for="notify-aura-suggestions">AURA Assistant Suggestions:</label>
+              <label class="switch">
+                <input type="checkbox" id="notify-aura-suggestions" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+            
+            <div class="notification-option">
+              <label for="notify-team-mentions">Team Member Mentions & Collaboration:</label>
+              <label class="switch">
+                <input type="checkbox" id="notify-team-mentions" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+            
+            <div class="notification-option">
+              <label for="notify-newsletter">Promotional & Feature Updates Newsletter:</label>
+              <label class="switch">
+                <input type="checkbox" id="notify-newsletter">
+                <span class="slider round"></span>
+              </label>
+            </div>
+            
+            <button class="btn btn-primary" id="save-notifications-btn">Save Notification Settings</button>
+          </div>
+          
+          <!-- Appearance Settings Section -->
+          <div class="settings-section appearance-settings">
+            <h2>
+              <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 10c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              Appearance
+            </h2>
+            
+            <div class="appearance-option">
+              <label>Application Theme:</label>
+              <div class="theme-selector">
+                <button class="theme-btn active" data-theme="dark">
+                  <svg viewBox="0 0 24 24"><path d="M10 2c-1.82 0-3.53.5-5 1.35C7.99 5.08 10 8.3 10 12s-2.01 6.92-5 8.65C6.47 21.5 8.18 22 10 22c5.52 0 10-4.48 10-10S15.52 2 10 2z"/></svg>
+                  Dark Mode
+                </button>
+                <button class="theme-btn" data-theme="light">
+                  <svg viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v1c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 19v1c0 .55.45 1 1 1s1-.45 1-1v-1c0-.55-.45-1-1-1s-1 .45-1 1zM4.99 4.99c-.39.39-.39 1.02 0 1.41l.7.7c.39.39 1.02.39 1.41 0l.7-.7c.39-.39.39-1.02 0-1.41l-.7-.7c-.39-.39-1.02-.39-1.41 0zm11.31 11.31c-.39.39-.39 1.02 0 1.41l.7.7c.39.39 1.02.39 1.41 0l.7-.7c.39-.39.39-1.02 0-1.41l-.7-.7c-.39-.39-1.02-.39-1.41 0z"/></svg>
+                  Light Mode
+                </button>
+                <button class="theme-btn" data-theme="system">Sync with System</button>
+              </div>
+            </div>
+            
+            <div class="appearance-option">
+              <label for="density-setting">Interface Density:</label>
+              <select id="density-setting">
+                <option value="comfortable">Comfortable</option>
+                <option value="compact">Compact</option>
+              </select>
+            </div>
+            
+            <button class="btn btn-primary" id="save-appearance-btn">Save Appearance Settings</button>
+          </div>
+        </div>
+        
+        <!-- Success Message Toast -->
+        <div class="settings-success-message" id="settings-toast">Settings saved successfully!</div>
+      </div>
+      
+      <!-- Emergency Initialization Script -->
+      <script>
+        // This script is a safety net to ensure page navigation works
+        (function () {
+          console.log("Emergency initialization script loaded");
+
+          // Basic navigation setup
+          const navLinks = document.querySelectorAll(".nav-links a[data-page]");
+          navLinks.forEach((link) => {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+
+              // Get target page
+              const targetPage = this.getAttribute("data-page");
+              console.log("Navigating to:", targetPage);
+
+              // Hide all pages
+              [
+                document.getElementById("dashboard-content"),
+                document.querySelector(".events-page-container"),
+                document.querySelector(".spark-wizard-container"),
+                document.querySelector(".resources-page-container"),
+                document.querySelector(".analytics-page-container"),
+                document.querySelector(".settings-page-container"),
+              ].forEach((el) => {
+                if (el) el.style.display = "none";
+              });
+
+              // Show target page
+              let pageToShow;
+              switch (targetPage) {
+                case "dashboard":
+                  pageToShow = document.getElementById("dashboard-content");
+                  break;
+                case "events":
+                  pageToShow = document.querySelector(
+                    ".events-page-container"
+                  );
+                  break;
+                case "new-event":
+                  pageToShow = document.querySelector(
+                    ".spark-wizard-container"
+                  );
+                  break;
+                case "resources":
+                  pageToShow = document.querySelector(
+                    ".resources-page-container"
+                  );
+                  break;                  case "analytics":
+                  pageToShow = document.querySelector(
+                    ".analytics-page-container"
+                  );
+                  break;
+                case "settings":
+                  pageToShow = document.querySelector(
+                    ".settings-page-container"
+                  );
+                  break;
+              }
+
+              if (pageToShow) pageToShow.style.display = "block";
+
+              // Update active state
+              navLinks.forEach((l) => l.classList.remove("active"));
+              this.classList.add("active");
+            });
+          });
+
+          // Quickfix for Create New Event Spark button
+          const quickSparkBtn = document.querySelector(".quick-spark-event");
+          if (quickSparkBtn) {
+            quickSparkBtn.addEventListener("click", function () {
+              document
+                .querySelector('.nav-links a[data-page="new-event"]')
+                .click();
+            });
+          }
+
+          // Quickfix for View All Events link
+          const viewAllEventsLink = document.querySelector(".card-link");
+          if (viewAllEventsLink) {
+            viewAllEventsLink.addEventListener("click", function (e) {
+              e.preventDefault();
+              document
+                .querySelector('.nav-links a[data-page="events"]')
+                .click();
+            });
+          }
+
+          // Quickfix for New Event Spark from events page
+          const newSparkFromEvents = document.getElementById(
+            "go-to-new-spark-from-events"
+          );
+          if (newSparkFromEvents) {
+            newSparkFromEvents.addEventListener("click", function () {
+              document
+                .querySelector('.nav-links a[data-page="new-event"]')
+                .click();
+            });
+          }
+        })();
+      </script>
+    </div>
+  </body>
+</html>
