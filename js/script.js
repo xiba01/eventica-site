@@ -21,8 +21,6 @@ window.addEventListener("load", function () {
     if (window.location.hash) {
       const targetPage = window.location.hash.substring(1);
       console.log("Found hash navigation request to:", targetPage);
-      
-      // Show loader before navigation (loading system will handle this)
       window.navigateTo(targetPage);
     }
   }, 100);
@@ -46,9 +44,6 @@ function initPageNavigation() {
 
       // Get the target page from data-page attribute
       const targetPage = this.getAttribute("data-page");
-      
-      // Show loader before page transition
-      AURALoader.showGlobalLoader(`Loading ${targetPage.charAt(0).toUpperCase() + targetPage.slice(1)}...`);
 
       // Hide all page containers
       hideAllPages();
@@ -61,11 +56,6 @@ function initPageNavigation() {
 
       // Update URL hash for history without triggering a page reload
       window.location.hash = targetPage;
-
-      // Hide loader after a short delay
-      setTimeout(() => {
-        AURALoader.hideGlobalLoader();
-      }, 500);
     });
   });
 }
@@ -179,29 +169,16 @@ function showPage(pageName) {
 // Global function to navigate to a specific page
 window.navigateTo = function (pageName) {
   console.log("Global navigation requested to:", pageName);
-  
-  // Show loader with page-specific message
-  const formattedPageName = pageName.charAt(0).toUpperCase() + pageName.slice(1).replace(/-/g, ' ');
-  AURALoader.showGlobalLoader(`Loading ${formattedPageName}...`);
-  
-  // Slight delay to ensure loading animation is visible
-  setTimeout(() => {
-    hideAllPages();
-    showPage(pageName);
-    
-    // Update active nav link if possible
-    const navLink = document.querySelector(
-      `.nav-links a[data-page="${pageName}"]`
-    );
-    if (navLink) {
-      updateActiveNavLink(navLink);
-    }
-    
-    // Hide loader after page content is rendered
-    setTimeout(() => {
-      AURALoader.hideGlobalLoader();
-    }, 300);
-  }, 300);
+  hideAllPages();
+  showPage(pageName);
+
+  // Update active nav link if possible
+  const navLink = document.querySelector(
+    `.nav-links a[data-page="${pageName}"]`
+  );
+  if (navLink) {
+    updateActiveNavLink(navLink);
+  }
 };
 
 // Function to update active state in navigation
@@ -573,24 +550,11 @@ function setupWizardNavigation() {
   // Add event listeners to navigation buttons
   if (nextStep1Button) {
     nextStep1Button.addEventListener("click", function () {
-      // Show loading state on the button
-      if (window.AURALoader) {
-        window.AURALoader.setButtonLoading(nextStep1Button, true);
-      }
-      
-      // Simulate processing delay
-      setTimeout(() => {
-        console.log("Moving to step 2: Scope & Scale");
-        if (visionBoard) visionBoard.style.display = "none";
-        if (scopeScaleBoard) scopeScaleBoard.style.display = "block";
-        updateProgressIndicator(2);
-        updateButtonVisibility(2);
-        
-        // Reset button state
-        if (window.AURALoader) {
-          window.AURALoader.setButtonLoading(nextStep1Button, false);
-        }
-      }, 500);
+      console.log("Moving to step 2: Scope & Scale");
+      if (visionBoard) visionBoard.style.display = "none";
+      if (scopeScaleBoard) scopeScaleBoard.style.display = "flex";
+      updateProgressIndicator(2);
+      updateButtonVisibility(2);
     });
   }
 
@@ -606,24 +570,11 @@ function setupWizardNavigation() {
 
   if (nextStep2Button) {
     nextStep2Button.addEventListener("click", function () {
-      // Show loading state on the button
-      if (window.AURALoader) {
-        window.AURALoader.setButtonLoading(nextStep2Button, true);
-      }
-      
-      // Simulate processing delay
-      setTimeout(() => {
-        console.log("Moving to step 3: Theme Generation");
-        if (scopeScaleBoard) scopeScaleBoard.style.display = "none";
-        if (themeGenerationBoard) themeGenerationBoard.style.display = "block";
-        updateProgressIndicator(3);
-        updateButtonVisibility(3);
-        
-        // Reset button state
-        if (window.AURALoader) {
-          window.AURALoader.setButtonLoading(nextStep2Button, false);
-        }
-      }, 500);
+      console.log("Moving to step 3: Theme Generation");
+      if (scopeScaleBoard) scopeScaleBoard.style.display = "none";
+      if (themeGenerationBoard) themeGenerationBoard.style.display = "block";
+      updateProgressIndicator(3);
+      updateButtonVisibility(3);
     });
   }
 
@@ -639,28 +590,11 @@ function setupWizardNavigation() {
 
   if (nextStep3Button) {
     nextStep3Button.addEventListener("click", function () {
-      // Show loading state on the button
-      if (window.AURALoader) {
-        window.AURALoader.setButtonLoading(nextStep3Button, true);
-        
-        // Also show the global loader to indicate theme processing
-        window.AURALoader.showGlobalLoader("Generating blueprint visualizations...");
-      }
-      
-      // Simulate processing delay (longer for blueprint generation)
-      setTimeout(() => {
-        console.log("Moving to step 4: Blueprint");
-        if (themeGenerationBoard) themeGenerationBoard.style.display = "none";
-        if (blueprintBoard) blueprintBoard.style.display = "block";
-        updateProgressIndicator(4);
-        updateButtonVisibility(4);
-        
-        // Reset button state and hide global loader
-        if (window.AURALoader) {
-          window.AURALoader.setButtonLoading(nextStep3Button, false);
-          window.AURALoader.hideGlobalLoader();
-        }
-      }, 1200);
+      console.log("Moving to step 4: Blueprint");
+      if (themeGenerationBoard) themeGenerationBoard.style.display = "none";
+      if (blueprintBoard) blueprintBoard.style.display = "block";
+      updateProgressIndicator(4);
+      updateButtonVisibility(4);
     });
   }
 
@@ -683,27 +617,9 @@ function setupWizardNavigation() {
 
   if (completeButton) {
     completeButton.addEventListener("click", function () {
-      // Show loading state on the button
-      if (window.AURALoader) {
-        window.AURALoader.setButtonLoading(completeButton, true);
-        
-        // Also show the global loader for final event creation
-        window.AURALoader.showGlobalLoader("Creating your event and saving details...");
-      }
-      
-      // Simulate event creation process
-      setTimeout(() => {
-        console.log("Completing spark wizard");
-        
-        // Reset button state
-        if (window.AURALoader) {
-          window.AURALoader.setButtonLoading(completeButton, false);
-          window.AURALoader.hideGlobalLoader();
-        }
-        
-        alert("Event spark created successfully! Redirecting to events page.");
-        window.navigateTo("events");
-      }, 1500);
+      console.log("Completing spark wizard");
+      alert("Event spark created successfully! Redirecting to events page.");
+      window.navigateTo("events");
     });
   }
 

@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add checkbox event listeners for tasks
   initTaskCheckboxes();
+
+  // Initialize AURA prompt buttons
+  initAuraPromptButtons();
 });
 
 // Set greeting based on time of day
@@ -40,7 +43,7 @@ function setGreeting() {
 
   if (greetingElement) {
     const userName =
-      greetingElement.textContent.split(",")[1]?.trim() || "Sarah";
+      greetingElement.textContent.split(",")[1]?.trim() || "Mostafa";
     greetingElement.textContent = `${greeting}, ${userName}!`;
   }
 }
@@ -63,51 +66,42 @@ function setDateTime() {
 // Initialize budget chart using Chart.js
 function initBudgetChart() {
   const budgetChartCanvas = document.getElementById("budget-chart");
-  const budgetChartContainer = budgetChartCanvas?.parentElement;
-  
   if (budgetChartCanvas && typeof Chart !== "undefined") {
-    // Show loading indicator while the chart initializes
-    if (budgetChartContainer && window.AURALoader) {
-      window.AURALoader.showInlineLoader(budgetChartContainer);
-    }
-    
-    // Simulate data loading delay
-    setTimeout(() => {
-      const ctx = budgetChartCanvas.getContext("2d");
-      new Chart(ctx, {
-        type: "doughnut",
-        data: {
-          labels: ["Venues", "Catering", "Marketing", "Tech", "Remaining"],
-          datasets: [
-            {
-              data: [38000, 23750, 19000, 14250, 30000],
-              backgroundColor: [
-                "#9d6eff",
-                "#4b7bec",
-                "#45aaf2",
-                "#2ecc71",
-                "#2c2c44",
-              ],
-              borderWidth: 0,
-              cutout: "70%",
+    const ctx = budgetChartCanvas.getContext("2d");
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["Venues", "Catering", "Marketing", "Tech", "Remaining"],
+        datasets: [
+          {
+            data: [38000, 23750, 19000, 14250, 30000],
+            backgroundColor: [
+              "#9d6eff",
+              "#4b7bec",
+              "#45aaf2",
+              "#2ecc71",
+              "#2c2c44",
+            ],
+            borderWidth: 0,
+            cutout: "70%",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            backgroundColor: "#1a1a2e",
+            titleColor: "#ffffff",
+            bodyColor: "#e0e0e0",
+            bodyFont: {
+              family: "Inter, sans-serif",
             },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            },
-            tooltip: {
-              backgroundColor: "#1a1a2e",
-              titleColor: "#ffffff",
-              bodyColor: "#e0e0e0",
-              bodyFont: {
-                family: "Inter, sans-serif",
-              },
-              titleFont: {
+            titleFont: {
               family: "Inter, sans-serif",
             },
             padding: 12,
@@ -139,22 +133,12 @@ function initAuraCommandInput() {
 
       // Clear input
       commandInput.value = "";
-      
-      // Add loading state to the send button
-      if (window.AURALoader) {
-        window.AURALoader.setButtonLoading(sendButton, true);
-      }
 
       // Display processing state
       responseArea.innerHTML = `<em>Processing your request...</em>`;
 
       // Simulate response delay (would be an actual API call in production)
       setTimeout(() => {
-        // Reset button loading state
-        if (window.AURALoader) {
-          window.AURALoader.setButtonLoading(sendButton, false);
-        }
-        
         let response = "";
 
         // Simple response mapping for demo
@@ -330,6 +314,88 @@ function initTaskCheckboxes() {
   }
 }
 
+// Mock responses for AURA Quick Help buttons
+const auraMockResponses = {
+  "What are my top 3 priority tasks?":
+    "Okay, Mostafa! Your top 3 priority tasks are:\n1. Finalize Speaker Contracts - AI Summit (Due: Jan 20)\n2. Send out Wave 2 Marketing Emails - Tech Conference (Due: Jan 22)\n3. Review Venue Options for Startup Pitch Night (Due: Jan 25)",
+  "Show budget status for 'AI Summit 2024'":
+    "The 'AI Summit 2024' budget is currently 65% utilized. Key spending areas are Venue Booking and Speaker Fees. You are on track overall.",
+  "Suggest a theme for a small workshop":
+    "How about 'Unlocking Creativity with Generative AI Tools'? It's engaging for a small workshop format. I can draft a sample agenda if you like!",
+  "Any overdue items?":
+    "You currently have 1 overdue task: 'Confirm Catering Menu - AI Summit'. I've highlighted it in your task list.",
+};
+
+// Display AURA response with typing animation
+function displayAuraResponse(text) {
+  const responseContainer = document.querySelector(".aura-response-container");
+  const responseText = document.getElementById("aura-response-text");
+
+  if (!responseContainer || !responseText) return;
+
+  // Hide the default response area
+  const defaultResponseArea = document.querySelector(".aura-response-area");
+  if (defaultResponseArea) {
+    defaultResponseArea.style.display = "none";
+  }
+
+  // Reset and show the response container
+  responseText.textContent = "";
+  responseContainer.style.display = "flex";
+
+  // Add visible class for fade-in animation
+  setTimeout(() => {
+    responseContainer.classList.add("visible");
+  }, 10);
+
+  // Clear any ongoing typing animation
+  if (window.auraTypingTimeout) {
+    clearTimeout(window.auraTypingTimeout);
+  }
+
+  // Typing animation
+  let i = 0;
+  const speed = 30; // milliseconds per character
+
+  function typeWriter() {
+    if (i < text.length) {
+      responseText.innerHTML += text.charAt(i);
+      i++;
+      window.auraTypingTimeout = setTimeout(typeWriter, speed);
+    }
+  }
+
+  i = 0;
+  window.auraTypingTimeout = setTimeout(typeWriter, speed);
+}
+
+// Function to initialize AURA prompt buttons
+function initAuraPromptButtons() {
+  const promptButtons = document.querySelectorAll(".aura-prompt-btn");
+  const commandInput = document.getElementById("aura-command-input");
+
+  if (promptButtons.length) {
+    promptButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const question = button.dataset.question;
+
+        // Optionally populate the command input
+        if (commandInput) {
+          commandInput.value = question;
+        }
+
+        // Get the response for this question
+        const responseText =
+          auraMockResponses[question] ||
+          "I'm still learning how to respond to that. Try another prompt!";
+
+        // Display the animated response
+        displayAuraResponse(responseText);
+      });
+    });
+  }
+}
+
 // Add event listeners for buttons
 document.addEventListener("DOMContentLoaded", function () {
   // View all events button
@@ -354,89 +420,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const viewBudgetBtn = document.querySelector(".view-breakdown");
   if (viewBudgetBtn) {
     viewBudgetBtn.addEventListener("click", function () {
-      // Show loading state on button
-      if (window.AURALoader) {
-        window.AURALoader.setButtonLoading(viewBudgetBtn, true);
-      }
-      
-      // Simulate data loading for budget breakdown
-      setTimeout(() => {
-        // Reset button loading state
-        if (window.AURALoader) {
-          window.AURALoader.setButtonLoading(viewBudgetBtn, false);
-        }
-        
-        // This would open a modal or navigate to a detailed budget view
-        // For now, we'll show an alert for demonstration
-        alert("Budget breakdown functionality would be implemented here.");
-      }, 800);
+      // This would open a modal or navigate to a detailed budget view
+      // For now, we'll show an alert for demonstration
+      alert("Budget breakdown functionality would be implemented here.");
     });
   }
+
   // Add task button
   const addTaskBtn = document.querySelector(".add-task");
   if (addTaskBtn) {
     addTaskBtn.addEventListener("click", function () {
-      // Show loading state on button
-      if (window.AURALoader) {
-        window.AURALoader.setButtonLoading(addTaskBtn, true);
-      }
-      
-      // Simulate task creation process
-      setTimeout(() => {
-        // Reset button loading state
-        if (window.AURALoader) {
-          window.AURALoader.setButtonLoading(addTaskBtn, false);
-        }
-        
-        // This would open a modal to add a new task
-        // For now, we'll show an alert for demonstration
-        alert("Add task functionality would be implemented here.");
-      }, 600);
+      // This would open a modal to add a new task
+      // For now, we'll show an alert for demonstration
+      alert("Add task functionality would be implemented here.");
     });
   }
+
   // Load more activities button
   const loadMoreActivitiesBtn = document.querySelector(".load-more-activities");
   if (loadMoreActivitiesBtn) {
     loadMoreActivitiesBtn.addEventListener("click", function () {
-      // Show loading state on button
-      if (window.AURALoader) {
-        window.AURALoader.setButtonLoading(loadMoreActivitiesBtn, true);
-      }
-      
-      // Simulate loading more activities
-      setTimeout(() => {
-        // Reset button loading state
-        if (window.AURALoader) {
-          window.AURALoader.setButtonLoading(loadMoreActivitiesBtn, false);
-        }
-        
-        // This would load more activities
-        // For now, we'll show an alert for demonstration
-        alert("Load more activities functionality would be implemented here.");
-      }, 800);
+      // This would load more activities
+      // For now, we'll show an alert for demonstration
+      alert("Load more activities functionality would be implemented here.");
     });
   }
+
   // Insight action buttons
   const insightActionBtns = document.querySelectorAll(".insight-action-btn");
   if (insightActionBtns.length) {
     insightActionBtns.forEach((btn) => {
       btn.addEventListener("click", function () {
-        // Show loading state on button
-        if (window.AURALoader) {
-          window.AURALoader.setButtonLoading(btn, true);
-        }
-        
-        // Simulate action processing
-        setTimeout(() => {
-          // Reset button loading state
-          if (window.AURALoader) {
-            window.AURALoader.setButtonLoading(btn, false);
-          }
-          
-          // This would perform the action
-          // For now, we'll show an alert for demonstration
-          alert(`Action: ${this.textContent} would be implemented here.`);
-        }, 700);
+        // This would perform the action
+        // For now, we'll show an alert for demonstration
+        alert(`Action: ${this.textContent} would be implemented here.`);
       });
     });
   }

@@ -15,12 +15,10 @@ function initSettingsPage() {
 
   // Theme buttons
   const themeButtons = document.querySelectorAll(".theme-btn");
+
   // Handle profile save
   if (saveProfileBtn) {
     saveProfileBtn.addEventListener("click", function () {
-      // Show loading state on button
-      AURALoader.setButtonLoading(saveProfileBtn, true);
-      
       const profileName = document.getElementById("profile-name").value;
       const profileTitle = document.getElementById("profile-title").value;
 
@@ -30,21 +28,14 @@ function initSettingsPage() {
         title: profileTitle,
       });
 
-      // Simulate a server request with slight delay
-      setTimeout(() => {
-        // Reset loading state
-        AURALoader.setButtonLoading(saveProfileBtn, false);
-        // Show success message
-        showSuccessToast();
-      }, 800);
+      // Show success message
+      showSuccessToast();
     });
   }
+
   // Handle notifications save
   if (saveNotificationsBtn) {
     saveNotificationsBtn.addEventListener("click", function () {
-      // Show loading state on button
-      AURALoader.setButtonLoading(saveNotificationsBtn, true);
-      
       const eventUpdates = document.getElementById(
         "notify-event-updates"
       ).value;
@@ -64,21 +55,14 @@ function initSettingsPage() {
         newsletter,
       });
 
-      // Simulate a server request with slight delay
-      setTimeout(() => {
-        // Reset loading state
-        AURALoader.setButtonLoading(saveNotificationsBtn, false);
-        // Show success message
-        showSuccessToast();
-      }, 800);
+      // Show success message
+      showSuccessToast();
     });
   }
+
   // Handle appearance save
   if (saveAppearanceBtn) {
     saveAppearanceBtn.addEventListener("click", function () {
-      // Show loading state on button
-      AURALoader.setButtonLoading(saveAppearanceBtn, true);
-      
       const activeThemeBtn = document.querySelector(".theme-btn.active");
       const theme = activeThemeBtn
         ? activeThemeBtn.getAttribute("data-theme")
@@ -91,13 +75,8 @@ function initSettingsPage() {
         density,
       });
 
-      // Simulate a server request with slight delay
-      setTimeout(() => {
-        // Reset loading state
-        AURALoader.setButtonLoading(saveAppearanceBtn, false);
-        // Show success message
-        showSuccessToast();
-      }, 800);
+      // Show success message
+      showSuccessToast();
     });
   }
 

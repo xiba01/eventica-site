@@ -173,15 +173,10 @@ function initResourcesPage() {
       showTab(tabId);
     });
   });
+
   // Add click event listener to search venues button
   if (searchVenuesBtn) {
     searchVenuesBtn.addEventListener("click", function () {
-      // Set button to loading state
-      AURALoader.setButtonLoading(searchVenuesBtn, true);
-      
-      // Show inline loader in the results area
-      AURALoader.showInlineLoader(venueResultsArea);
-      
       // Get filter values
       const location = document
         .getElementById("venue-location")
@@ -231,7 +226,9 @@ function initResourcesPage() {
       // Filter by budget (max per day)
       filteredVenues = filteredVenues.filter(
         (venue) => venue.estimatedPrice.min <= budget
-      );      // Filter by amenities (must have all selected amenities)
+      );
+
+      // Filter by amenities (must have all selected amenities)
       if (selectedAmenities.length > 0) {
         filteredVenues = filteredVenues.filter((venue) =>
           selectedAmenities.every((amenity) =>
@@ -242,12 +239,11 @@ function initResourcesPage() {
 
       // Simulate a brief loading delay for a more realistic experience
       venueResultsArea.style.display = "block";
-      
-      // Use the loading system for a consistent experience
+      venueResultsGrid.innerHTML =
+        '<div class="loading-spinner">Searching venues...</div>';
+
       setTimeout(() => {
         renderVenueResults(filteredVenues);
-        // Reset button loading state
-        AURALoader.setButtonLoading(searchVenuesBtn, false);
       }, 800);
     });
   }
