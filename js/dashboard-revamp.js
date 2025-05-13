@@ -139,12 +139,22 @@ function initAuraCommandInput() {
 
       // Clear input
       commandInput.value = "";
+      
+      // Add loading state to the send button
+      if (window.AURALoader) {
+        window.AURALoader.setButtonLoading(sendButton, true);
+      }
 
       // Display processing state
       responseArea.innerHTML = `<em>Processing your request...</em>`;
 
       // Simulate response delay (would be an actual API call in production)
       setTimeout(() => {
+        // Reset button loading state
+        if (window.AURALoader) {
+          window.AURALoader.setButtonLoading(sendButton, false);
+        }
+        
         let response = "";
 
         // Simple response mapping for demo
@@ -344,40 +354,89 @@ document.addEventListener("DOMContentLoaded", function () {
   const viewBudgetBtn = document.querySelector(".view-breakdown");
   if (viewBudgetBtn) {
     viewBudgetBtn.addEventListener("click", function () {
-      // This would open a modal or navigate to a detailed budget view
-      // For now, we'll show an alert for demonstration
-      alert("Budget breakdown functionality would be implemented here.");
+      // Show loading state on button
+      if (window.AURALoader) {
+        window.AURALoader.setButtonLoading(viewBudgetBtn, true);
+      }
+      
+      // Simulate data loading for budget breakdown
+      setTimeout(() => {
+        // Reset button loading state
+        if (window.AURALoader) {
+          window.AURALoader.setButtonLoading(viewBudgetBtn, false);
+        }
+        
+        // This would open a modal or navigate to a detailed budget view
+        // For now, we'll show an alert for demonstration
+        alert("Budget breakdown functionality would be implemented here.");
+      }, 800);
     });
   }
-
   // Add task button
   const addTaskBtn = document.querySelector(".add-task");
   if (addTaskBtn) {
     addTaskBtn.addEventListener("click", function () {
-      // This would open a modal to add a new task
-      // For now, we'll show an alert for demonstration
-      alert("Add task functionality would be implemented here.");
+      // Show loading state on button
+      if (window.AURALoader) {
+        window.AURALoader.setButtonLoading(addTaskBtn, true);
+      }
+      
+      // Simulate task creation process
+      setTimeout(() => {
+        // Reset button loading state
+        if (window.AURALoader) {
+          window.AURALoader.setButtonLoading(addTaskBtn, false);
+        }
+        
+        // This would open a modal to add a new task
+        // For now, we'll show an alert for demonstration
+        alert("Add task functionality would be implemented here.");
+      }, 600);
     });
   }
-
   // Load more activities button
   const loadMoreActivitiesBtn = document.querySelector(".load-more-activities");
   if (loadMoreActivitiesBtn) {
     loadMoreActivitiesBtn.addEventListener("click", function () {
-      // This would load more activities
-      // For now, we'll show an alert for demonstration
-      alert("Load more activities functionality would be implemented here.");
+      // Show loading state on button
+      if (window.AURALoader) {
+        window.AURALoader.setButtonLoading(loadMoreActivitiesBtn, true);
+      }
+      
+      // Simulate loading more activities
+      setTimeout(() => {
+        // Reset button loading state
+        if (window.AURALoader) {
+          window.AURALoader.setButtonLoading(loadMoreActivitiesBtn, false);
+        }
+        
+        // This would load more activities
+        // For now, we'll show an alert for demonstration
+        alert("Load more activities functionality would be implemented here.");
+      }, 800);
     });
   }
-
   // Insight action buttons
   const insightActionBtns = document.querySelectorAll(".insight-action-btn");
   if (insightActionBtns.length) {
     insightActionBtns.forEach((btn) => {
       btn.addEventListener("click", function () {
-        // This would perform the action
-        // For now, we'll show an alert for demonstration
-        alert(`Action: ${this.textContent} would be implemented here.`);
+        // Show loading state on button
+        if (window.AURALoader) {
+          window.AURALoader.setButtonLoading(btn, true);
+        }
+        
+        // Simulate action processing
+        setTimeout(() => {
+          // Reset button loading state
+          if (window.AURALoader) {
+            window.AURALoader.setButtonLoading(btn, false);
+          }
+          
+          // This would perform the action
+          // For now, we'll show an alert for demonstration
+          alert(`Action: ${this.textContent} would be implemented here.`);
+        }, 700);
       });
     });
   }
