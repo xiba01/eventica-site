@@ -48,6 +48,9 @@
   background-color: #252540;
   padding: 24px;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .aura-interaction-header {
@@ -679,6 +682,79 @@
 
 .btn-primary:hover {
   background-color: #8c5ceb;
+}
+
+/* AURA Prompt Buttons */
+.aura-prompt-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.aura-prompt-btn {
+  background-color: #333348;
+  color: #A0A0B0;
+  border: 1px solid #444458;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.aura-prompt-btn:hover {
+  background-color: #4A4A6A;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.aura-response-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #1F1F32;
+  border-radius: 8px;
+  border-left: 3px solid #6F42C1;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.aura-response-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aura-response-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #6F42C1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.aura-response-avatar svg {
+  width: 18px;
+  height: 18px;
+  fill: #FFFFFF;
+}
+
+.aura-response-text-wrapper {
+  flex-grow: 1;
+}
+
+#aura-response-text {
+  color: #D0D0E0;
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
 }
 
 /* Responsive adjustments */
