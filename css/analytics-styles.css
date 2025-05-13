@@ -326,9 +326,16 @@ h5 .chart-tooltip-trigger {
   align-items: flex-end;
   height: 250px;
   margin-top: 15px;
-  flex: 1;
-  padding-bottom: 25px; /* Add padding to ensure labels are visible */
-  overflow: visible; /* Ensure labels are not cut off */
+  padding-bottom: 35px; /* Increased padding for labels */
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  flex-wrap: nowrap; /* Ensure items don't wrap to next line */
+  position: relative; /* For proper positioning of children */
 }
 
 .bar-group {
@@ -336,13 +343,18 @@ h5 .chart-tooltip-trigger {
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  width: 60px;
+  min-width: 40px; /* Reduced minimum width */
+  margin: 0 5px; /* Reduced margin for better spacing */
+  flex: 1; /* Allow bars to grow */
+  flex-shrink: 0; /* Prevent bars from shrinking */
+  max-width: 60px; /* Maximum width to prevent oversizing */
 }
 
 .bar-group .bar {
-  width: 20px;
+  width: 18px; /* Slightly smaller width */
   border-radius: 3px 3px 0 0;
   transition: height 0.3s ease;
+  margin: 0 auto; /* Center the bar */
 }
 
 .bar.roi {
@@ -354,9 +366,16 @@ h5 .chart-tooltip-trigger {
 }
 
 .group-label {
-  font-size: 0.8em;
+  font-size: 0.7em; /* Slightly smaller font */
   color: #888;
-  margin-top: 5px;
+  margin-top: 8px;
+  text-align: center;
+  white-space: nowrap;
+  max-width: 100%; /* Allow label to use full width of bar group */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform: rotate(-15deg); /* Angle the text for better fit */
+  transform-origin: center top;
 }
 
 .word-cloud-placeholder {
@@ -393,17 +412,21 @@ h5 .chart-tooltip-trigger {
 /* Custom Tooltip */
 .chart-tooltip {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(25, 25, 40, 0.9);
   color: white;
   padding: 8px 12px;
   border-radius: 4px;
   font-size: 0.85em;
   pointer-events: none;
-  transform: translate(-50%, -120%);
+  transform: translate(-50%, -110%);
   white-space: nowrap;
-  z-index: 100;
+  z-index: 1000;
   opacity: 0;
   transition: opacity 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 200px;
+  text-align: center;
 }
 
 /* Media Queries for Responsive Design */
@@ -428,5 +451,32 @@ h5 .chart-tooltip-trigger {
 
   .charts-section {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .charts-section {
+    grid-template-columns: 1fr; /* Single column on small screens */
+  }
+  
+  .chart-container {
+    min-height: 300px; /* Slightly taller on mobile */
+    height: auto; /* Allow height to adjust */
+    padding: 15px 10px; /* Reduce padding */
+  }
+  
+  .grouped-bar-chart-svg {
+    overflow-x: auto; /* Allow horizontal scrolling */
+    justify-content: flex-start; /* Start alignment for scrollable content */
+    padding-bottom: 40px; /* Extra space for rotated labels */
+  }
+  
+  .bar-group {
+    min-width: 35px; /* Even smaller on mobile */
+    margin: 0 3px; /* Tighter spacing */
+  }
+  
+  .group-label {
+    transform: rotate(-25deg); /* More rotation on small screens */
   }
 }

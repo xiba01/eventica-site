@@ -604,11 +604,11 @@ function drawROICostChart() {
   // Clear existing content
   container.innerHTML = "";
 
-  // Use container height defined in CSS rather than setting it explicitly
+  // Get container dimensions
   const containerRect = container.getBoundingClientRect();
   const containerWidth = containerRect.width;
   const containerHeight = containerRect.height || 250; // Use existing height or default to 250px
-  const maxBarHeight = containerHeight * 0.7; // 70% of container height for bars
+  const maxBarHeight = containerHeight * 0.65; // 65% of container height for bars to leave room for labels
 
   const data = analyticsData.roiCostData;
 
@@ -617,16 +617,18 @@ function drawROICostChart() {
     ...data.map((item) => Math.max(item.roi, item.cost))
   );
 
-  // Calculate bar width based on container width
-  const barWidth = Math.max(
-    20,
-    Math.min(40, containerWidth / (data.length * 3))
-  ); // Responsive bar width
+  // Calculate bar width based on container width and number of data points
+  const numOfGroups = data.length;
+  const groupSpacing = 10; // Space between groups in pixels
+  const availableWidth = containerWidth - (groupSpacing * (numOfGroups - 1));
+  const groupWidth = Math.floor(availableWidth / numOfGroups);
+  const barWidth = Math.min(18, Math.max(10, groupWidth / 3)); // Keep between 10-18px
 
   // Create bar groups
-  data.forEach((item) => {
+  data.forEach((item, index) => {
     const barGroup = document.createElement("div");
     barGroup.className = "bar-group";
+    barGroup.style.width = `${groupWidth}px`;
 
     // ROI bar
     const roiBar = document.createElement("div");
@@ -910,3 +912,19 @@ function setupTooltips() {
     });
   });
 }
+
+// Add resize event listener to redraw charts when window is resized
+window.addEventListener('resize', function() {
+  // Only redraw if analytics page is active
+  if (document.querySelector('.analytics-page-container') && 
+      document.querySelector('.analytics-page-container').style.display !== 'none') {
+    // Debounce the resize to prevent excessive redraws
+    clearTimeout(window.resizeTimeout);
+    window.resizeTimeout = setTimeout(function() {
+      drawAttendanceLineChart();
+      drawEngagementDonutChart();
+      drawROICostChart();
+      createWordCloud();
+    }, 250);
+  }
+});
